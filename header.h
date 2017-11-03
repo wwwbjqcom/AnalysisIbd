@@ -2,8 +2,6 @@
 #include "pag0page.h"
 
 
-
-
 typedef struct
 {
 	uint addr_page;
