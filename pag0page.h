@@ -1,4 +1,5 @@
 #include "fsp.h"
+#include "rec.h"
 
 /*			PAGE HEADER
 ===========
@@ -114,4 +115,21 @@ directory. */
 #define	PAGE_DIR_SLOT_MIN_N_OWNED	4
 
 
+/************************************************************//**
+			TRUE if the record is on a page in compact format.
+			@return nonzero if in compact format */
 ulint page_is_comp(char*	page);
+
+/************************************************************//**
+	Determine whether the page is a B-tree leaf.
+	@return true if the page is a B-tree leaf (PAGE_LEVEL = 0) */
+bool page_is_leaf(const char*	page)	/*!< in: page */;
+
+
+/*************************************************************//**
+					Gets the number of records in the heap.
+					@return number of user records */
+ulint
+page_dir_get_n_heap(
+	/*================*/
+	const char*	page)	/*!< in: index page */

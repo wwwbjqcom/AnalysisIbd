@@ -34,11 +34,41 @@ static const char infimum_supremum_compact[] = {
 	's', 'u', 'p', 'r', 'e', 'm', 'u', 'm'
 };
 
+
+
+/************************************************************//**
+		TRUE if the record is on a page in compact format.
+		@return nonzero if in compact format */
 ulint page_is_comp(
 	/*=========*/
 	char*	page)	/*!< in: index page */
 {
 	ulint tmp_value;
-	memcpy(&tmp_value, page + PAGE_HEADER + PAGE_N_HEAP, 1);
+	memcpy(&tmp_value, page + PAGE_HEADER + PAGE_N_HEAP, 2);
 	return(tmp_value & 0x8000);
+}
+
+/************************************************************//**
+	Determine whether the page is a B-tree leaf.
+	@return true if the page is a B-tree leaf (PAGE_LEVEL = 0) */
+bool
+page_is_leaf(
+	/*=========*/
+	char*	page)	/*!< in: page */
+{
+	return(!*(const uint16*)(page + (PAGE_HEADER + PAGE_LEVEL)));
+}
+
+
+/*************************************************************//**
+					Gets the number of records in the heap.
+					@return number of user records */
+ulint
+page_dir_get_n_heap(
+	/*================*/
+	const char*	page)	/*!< in: index page */
+{
+	uint16 tmpvalue;
+	memcpy(&tmpvalue, page + PAGE_HEADER + PAGE_N_HEAP, 2);
+	return(tmpvalue & 0x7fff);
 }
