@@ -111,6 +111,8 @@ dict_table_t::flags */
 /** Offset of the space header within a file page */
 #define FSP_HEADER_OFFSET	FIL_PAGE_DATA
 
+#define FIL_PAGE_OFFSET		4	/*!< page offset inside space */
+
 
 /** Width of the ATOMIC_BLOBS flag.  The ability to break up a long
 column into an in-record prefix and an externally stored part is available

@@ -164,7 +164,7 @@ void Enter(char *file_name)
 	fsp_info_value->page_ssize = FSP_FLAGS_GET_PAGE_SSIZE(tmp_value);
 
 	//page_number
-	memcpy(&tmp_value, buffer + FSP_HEADER_OFFSET + PAGE_HEAP_TOP, 2);
+	memcpy(&tmp_value, buffer + FIL_PAGE_OFFSET, 4);
 	fsp_info_value->page_number = conversion_byte_order_two(tmp_value);
 
 	//size_in_header
