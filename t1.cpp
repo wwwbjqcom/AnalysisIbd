@@ -255,6 +255,7 @@ void Print_content(Fsp_Info *fsp_info_value)
 	cout << "size_in_header: " << fsp_info_value->fsp_size << endl;
 	cout << "space_id: " << fsp_info_value->space_id << endl;
 	cout << "id: " << fsp_info_value->fsp_space_id << endl;
+	cout << "is_compact: " << fsp_info_value->is_com << endl;
 	cout << "free_limit: " << fsp_info_value->free_limit << endl;
 	cout << "free_len: " << fsp_info_value->free_len << endl;
 	cout << "fsp_type_fsp_hdr: " << fsp_info_value->fil_page_type << endl;

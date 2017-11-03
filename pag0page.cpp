@@ -42,13 +42,3 @@ ulint page_is_comp(
 	memcpy(&tmp_value, page + PAGE_HEADER + PAGE_N_HEAP, 1);
 	return(tmp_value & 0x8000);
 }
-
-
-ulint page_is_comp(
-	/*=========*/
-	char*	page)	/*!< in: index page */
-{
-	ulint tmp_value;
-	memcpy(&tmp_value, page + PAGE_HEADER + PAGE_N_HEAP, 1);
-	return(tmp_value & 0x8000);
-}
