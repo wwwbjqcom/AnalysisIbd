@@ -70,7 +70,7 @@ FSP_FREE_LIMIT at a time */
 
 /*			Calculate
 ============*/
-typedef unsigned long int	ulint;
+typedef unsigned long int ulint;
 typedef unsigned int uint;
 typedef unsigned short uint16;
 #define byte unsigned char;

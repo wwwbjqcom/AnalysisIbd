@@ -1,11 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>  
-#include <iostream>
-#include <cstring>
 #include "fsp.h"
 #include "pag0page.h"
-
-using namespace std;
 
 
 
@@ -49,7 +43,7 @@ typedef struct
 }Fsp_Info;
 
 //读取page数据
-char* get_page_value(FILE* fp);
+char* get_page_value(FILE* fp, uint* page_size);
 
 void Print_content(Fsp_Info *fsp_info_value);
 
@@ -74,4 +68,4 @@ void Enter(char *file_name);
 void Print_content(Fsp_Info *fsp_info_value);
 
 //读取页数据
-char* get_page_value(FILE* fp, uint* page_size)
+char* get_page_value(FILE* fp, uint* page_size);
