@@ -1,7 +1,11 @@
 //例子1：以二进制模式打开并写入文件
+#include <stdio.h>
+#include <stdlib.h>  
 #include <iostream>
+#include <cstring>
+#include "fsp.h"
+#include "pag0page.h"
 #include "header.h"
-
 using namespace std;
 
 int main(int argc, char ** argv)
