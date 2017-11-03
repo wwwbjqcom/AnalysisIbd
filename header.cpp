@@ -149,7 +149,7 @@ void Enter(char *file_name)
 	//page_size
 	fseek(fp, FSP_HEADER_OFFSET + FSP_SPACE_FLAGS,0);
 	fread(&tmp_value, 4, 1, fp);
-	fsp_info_value->page_ssize = FSP_FLAGS_GET_PAGE_SSIZE(tmp_value);
+	fsp_info_value->page_size = page_size_t(tmp_value);
 	
 
 	/* ∞—header“≥∂¡»Îbuffer*/
