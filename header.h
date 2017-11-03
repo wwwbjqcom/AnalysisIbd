@@ -1,5 +1,11 @@
+#include <stdio.h>
+#include <stdlib.h>  
+#include <iostream>
+#include <cstring>
 #include "fsp.h"
+#include "pag0page.h"
 
+using namespace std;
 
 
 
