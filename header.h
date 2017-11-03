@@ -25,6 +25,7 @@ struct Fsp_Info
 	uint free_len;
 	uint free_limit;
 	bool is_com;
+	uint page_number;
 	uint fil_page_type; //类型
 	uint fsp_space_id; //表空间id
 	uint fsp_not_used; //未使用的簇数量

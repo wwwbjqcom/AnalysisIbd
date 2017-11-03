@@ -163,6 +163,9 @@ void Enter(char *file_name)
 	memcpy(&tmp_value, buffer + FSP_HEADER_OFFSET + FSP_SPACE_FLAGS, 4);
 	fsp_info_value->page_ssize = FSP_FLAGS_GET_PAGE_SSIZE(tmp_value);
 
+	//page_number
+	memcpy(&tmp_value, buffer + FSP_HEADER_OFFSET + PAGE_HEAP_TOP, 2);
+	fsp_info_value->page_number = conversion_byte_order_two(tmp_value);
 
 	//size_in_header
 	memcpy(&tmp_value, buffer + FSP_HEADER_OFFSET + FSP_SIZE, 4);
@@ -232,6 +235,7 @@ void Print_content(Fsp_Info *fsp_info_value)
 	cout << "space_id: " << fsp_info_value->space_id << endl;
 	cout << "id: " << fsp_info_value->fsp_space_id << endl;
 	cout << "is_compact: " << fsp_info_value->is_com << endl;
+	cout << "page_number: " << fsp_info_value->page_number << endl;
 	cout << "free_limit: " << fsp_info_value->free_limit << endl;
 	cout << "free_len: " << fsp_info_value->free_len << endl;
 	cout << "fsp_type_fsp_hdr: " << fsp_info_value->fil_page_type << endl;
