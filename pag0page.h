@@ -123,13 +123,11 @@ ulint page_is_comp(char*	page);
 /************************************************************//**
 	Determine whether the page is a B-tree leaf.
 	@return true if the page is a B-tree leaf (PAGE_LEVEL = 0) */
-bool page_is_leaf(const char*	page)	/*!< in: page */;
+bool page_is_leaf(const char*	page);	/*!< in: page */
 
 
 /*************************************************************//**
 					Gets the number of records in the heap.
 					@return number of user records */
 ulint
-page_dir_get_n_heap(
-	/*================*/
-	const char*	page)	/*!< in: index page */
+page_dir_get_n_heap(const char*	page);	/*!< in: index page */
