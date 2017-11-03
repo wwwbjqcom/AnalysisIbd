@@ -2,21 +2,21 @@
 #include "pag0page.h"
 
 
-typedef struct
+struct point_info
 {
 	uint addr_page;
 	uint addr_offset;
-}point_info;
+};
 
-typedef struct
+struct fsp_info
 {
 	uint flst_len;  //链表长度
 	point_info flst_first; //链表第一个的指针
 	point_info flst_last; //链表中最后最后一个的指针
-}fsp_info;
+};
 
 
-typedef struct
+struct Fsp_Info
 {
 	FILE *fp;
 	uint page_ssize;
@@ -38,7 +38,7 @@ typedef struct
 	fsp_info fsp_seg_inodes_full;//同上，用于存放管理数据段的页面链表，该指针为已满的数据页链表
 	fsp_info fsp_seg_inodes_free;//同上，存放指针为半满存放数据段管理信息的数据页链表
 	uint fsp_seg_id;//偏移FSP_SEG_ID记录段ID，占用1bytes，数据段ID
-}Fsp_Info;
+};
 
 //读取page数据
 char* get_page_value(FILE* fp, uint* page_size);
