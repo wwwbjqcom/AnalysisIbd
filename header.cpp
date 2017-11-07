@@ -205,15 +205,15 @@ void Print_content(Fsp_Info *fsp_info_value)
 	printf("FSP £º fsp_flags: %d, fsp_not_used: %d, fsp_frag_n_used: %d\n", fsp_info_value->fsp_space_flags, fsp_info_value->fsp_not_used,
 		fsp_info_value->fsp_frag_n_used);
 
-	printf("     fsp_free: len: %d, firset_page_number: %d, firset_page_offset: %d, last_page_number: %d, last_page_offset: %d\n",
+	printf("       fsp_free: len: %d, firset_page_number: %d, firset_page_offset: %d, last_page_number: %d, last_page_offset: %d\n",
 		fsp_info_value->fsp_free.flst_len, fsp_info_value->fsp_free.flst_first.addr_page, fsp_info_value->fsp_free.flst_first.addr_offset,
 		fsp_info_value->fsp_free.flst_last.addr_page, fsp_info_value->fsp_free.flst_last.addr_offset);
 
-	printf("     fsp_free_frag: len: %d, firset_page_number: %d, firset_page_offset: %d, last_page_number: %d, last_page_offset: %d\n",
+	printf("       fsp_free_frag: len: %d, firset_page_number: %d, firset_page_offset: %d, last_page_number: %d, last_page_offset: %d\n",
 		fsp_info_value->fsp_free_frag.flst_len, fsp_info_value->fsp_free_frag.flst_first.addr_page, fsp_info_value->fsp_free_frag.flst_first.addr_offset,
 		fsp_info_value->fsp_free_frag.flst_last.addr_page, fsp_info_value->fsp_free_frag.flst_last.addr_offset);
 
-	printf("     fsp_full_frag: len: %d, firset_page_number: %d, firset_page_offset: %d, last_page_number: %d, last_page_offset: %d\n",
+	printf("       fsp_full_frag: len: %d, firset_page_number: %d, firset_page_offset: %d, last_page_number: %d, last_page_offset: %d\n",
 		fsp_info_value->fsp_full_frag.flst_len, fsp_info_value->fsp_full_frag.flst_first.addr_page, fsp_info_value->fsp_full_frag.flst_first.addr_offset,
 		fsp_info_value->fsp_full_frag.flst_last.addr_page, fsp_info_value->fsp_full_frag.flst_last.addr_offset);
 
