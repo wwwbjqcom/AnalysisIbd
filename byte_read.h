@@ -1,4 +1,5 @@
-#ifndef _BYTE_READ_H_
+
+#ifndef 1
 
 
 #include "fsp.h"
@@ -56,5 +57,10 @@ mach_read_from_1(
 	return((ulint)(b[0]));
 }
 
-#endif // _BYTE_READ_H_
+
+
+#endif // !1
+
+
+
 
