@@ -6,6 +6,7 @@
 
 Index page header starts at the first offset left free by the FIL-module */
 
+
 #define	PAGE_HEADER	FIL_PAGE_DATA	/* index page header starts at this
 offset */
 /*-----------------------------*/
@@ -115,6 +116,12 @@ directory. */
 #define	PAGE_DIR_SLOT_MIN_N_OWNED	4
 
 
+#define REC_OLD_N_OWNED		6	/* This is single byte bit-field */
+#define REC_NEW_N_OWNED		5	/* This is single byte bit-field */
+#define	REC_N_OWNED_MASK	0xFUL
+#define REC_N_OWNED_SHIFT	0
+
+
 /************************************************************//**
 			TRUE if the record is on a page in compact format.
 			@return nonzero if in compact format */
@@ -131,3 +138,28 @@ bool page_is_leaf(const char*	page);	/*!< in: page */
 					@return number of user records */
 ulint
 page_dir_get_n_heap(const char*	page);	/*!< in: index page */
+
+
+/******************************************************//**
+The following function is used to get the number of records owned by the
+previous directory record.
+@return number of owned records */
+ulint rec_get_n_owned_new(const char*	rec);	/*!< in: new-style physical record */
+
+/******************************************************//**
+The following function is used to get the number of records owned by the
+previous directory record.
+@return number of owned records */
+ulint rec_get_n_owned_old(
+	/*================*/
+	const char*	rec);	/*!< in: old-style physical record */
+
+/******************************************************//**
+					Gets a bit field from within 1 byte. */
+ulint rec_get_bit_field_1(
+	/*================*/
+	const char*	rec,	/*!< in: pointer to record origin */
+	ulint		offs,	/*!< in: offset from the origin down */
+	ulint		mask,	/*!< in: mask used to filter bits */
+	ulint		shift);	/*!< in: shift right applied after masking */
+

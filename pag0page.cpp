@@ -1,5 +1,6 @@
 #include "fsp.h"
 #include "pag0page.h"
+#include "byte_read.h"
 #include <cstring>
 
 /** The page infimum and supremum of an empty page in ROW_FORMAT=REDUNDANT */
@@ -33,6 +34,46 @@ static const char infimum_supremum_compact[] = {
 	0x00, 0x00/* end of record list */,
 	's', 'u', 'p', 'r', 'e', 'm', 'u', 'm'
 };
+
+
+
+/******************************************************//**
+The following function is used to get the number of records owned by the
+previous directory record.
+@return number of owned records */
+ulint rec_get_n_owned_new(
+	/*================*/
+	const char*	rec)	/*!< in: new-style physical record */
+{
+	return(rec_get_bit_field_1(rec, REC_NEW_N_OWNED,
+		REC_N_OWNED_MASK, REC_N_OWNED_SHIFT));
+}
+
+
+/******************************************************//**
+The following function is used to get the number of records owned by the
+previous directory record.
+@return number of owned records */
+ulint rec_get_n_owned_old(
+	/*================*/
+	const char*	rec)	/*!< in: old-style physical record */
+{
+	return(rec_get_bit_field_1(rec, REC_OLD_N_OWNED,
+		REC_N_OWNED_MASK, REC_N_OWNED_SHIFT));
+}
+
+/******************************************************//**
+Gets a bit field from within 1 byte. */
+ulint rec_get_bit_field_1(
+	/*================*/
+	const char*	rec,	/*!< in: pointer to record origin */
+	ulint		offs,	/*!< in: offset from the origin down */
+	ulint		mask,	/*!< in: mask used to filter bits */
+	ulint		shift)	/*!< in: shift right applied after masking */
+{
+
+	return((mach_read_from_1(rec - offs) & mask) >> shift);
+}
 
 
 

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstring>
 #include "header.h"
+#include "byte_read.h"
 using namespace std;
 
 
@@ -160,8 +161,9 @@ void Enter(char *file_name)
 
 
 	//page_ssize
-	memcpy(&tmp_value, buffer + FSP_HEADER_OFFSET + FSP_SPACE_FLAGS, 4);
-	fsp_info_value->page_ssize = FSP_FLAGS_GET_PAGE_SSIZE(tmp_value);
+	//memcpy(&tmp_value, buffer + FSP_HEADER_OFFSET + FSP_SPACE_FLAGS, 4);
+	//fsp_info_value->page_ssize = FSP_FLAGS_GET_PAGE_SSIZE(tmp_value);
+	fsp_info_value->page_ssize = mach_read_from_4(buffer + FSP_HEADER_OFFSET + FSP_SPACE_FLAGS);
 
 	//page_number
 	memcpy(&tmp_value, buffer + FIL_PAGE_OFFSET, 4);

@@ -14,6 +14,9 @@ File space header data structure: this data structure is contained in the
 first page of a space. The space for this header is reserved in every extent
 descriptor page, but used only in the first. */
 
+#define FSEG_HEADER_SIZE	10	/*!< Length of the file system
+header, in bytes */
+
 /*-------------------------------------*/
 #define FSP_SPACE_ID		0	/* space id */
 #define FSP_NOT_USED		4	/* this field contained a value up to
@@ -226,7 +229,7 @@ value when flushing pages. */
 #define FIL_PAGE_COMPRESSED	14	/*!< Compressed page */
 #define FIL_PAGE_ENCRYPTED	15	/*!< Encrypted page */
 #define FIL_PAGE_COMPRESSED_AND_ENCRYPTED 16
-
+#define FIL_PAGE_DATA_END	8	/*!< size of the page trailer */
 
 /* Directions of cursor movement */
 #define	PAGE_LEFT		1
