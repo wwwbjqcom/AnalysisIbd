@@ -1,5 +1,7 @@
 #include "byte_read.h"
-
+#include <cstring>
+#include <iostream>
+using namespace std;
 /********************************************************//**
 														  The following function is used to fetch data from 4 consecutive
 														  bytes. The most significant byte is at the lowest address.
@@ -13,8 +15,11 @@ ulint mach_read_from_4(const char* b)	/*!< in: pointer to four bytes */
 		);
 }
 
-ulint mach_big_read_from_4(const char* b)	/*!< in: pointer to four bytes for big ending */
+ulint mach_little_read_from_4(const char* b)	/*!< in: pointer to four bytes for little ending */
 {
+	ulint tmp_value;
+	memcpy(&tmp_value, b, 4);
+	cout << tmp_value << endl;
 	return((ulint)(b[0])
 		| ((ulint)(b[1]) << 8)
 		| ((ulint)(b[2]) << 16)
@@ -38,9 +43,9 @@ ulint mach_read_from_3(
 		);
 }
 
-ulint mach_big_read_from_3(
+ulint mach_little_read_from_3(
 	/*=============*/
-	const char*	b)	/*!< in: pointer to 3 bytes for big ending*/
+	const char*	b)	/*!< in: pointer to 3 bytes for little ending*/
 {
 
 	return((ulint)(b[0])
@@ -63,9 +68,9 @@ mach_read_from_2(
 }
 
 ulint
-mach_big_read_from_2(
+mach_little_read_from_2(
 	/*=============*/
-	const char*	b)	/*!< in: pointer to 2 bytes for big ending */
+	const char*	b)	/*!< in: pointer to 2 bytes for little ending */
 {
 	return((ulint)(b[0]) | ((ulint)(b[1]) << 8));
 }
