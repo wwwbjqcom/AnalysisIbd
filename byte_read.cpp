@@ -39,12 +39,9 @@ int conversion_byte_order_2(short num)
 ulint mach_read_from_4(const char* b)	/*!< in: pointer to four bytes */
 {
 
-
-	return conversion_byte_order_4((((ulint)(b[0]) << 24)
-		| ((ulint)(b[1]) << 16)
-		| ((ulint)(b[2]) << 8)
-		| (ulint)(b[3])
-		));
+	ulint tmp_value;
+	memcpy(&tmp_value, b, 4);
+	return conversion_byte_order_4(tmp_value);
 }
 
 ulint mach_little_read_from_4(const char* b)	/*!< in: pointer to four bytes for little ending */
@@ -67,10 +64,9 @@ ulint mach_read_from_3(
 	const char*	b)	/*!< in: pointer to 3 bytes */
 {
 
-	return conversion_byte_order_3(((ulint)(b[0]) << 16)
-		| ((ulint)(b[1]) << 8)
-		| (ulint)(b[2])
-		);
+	ulint tmp_value;
+	memcpy(&tmp_value, b, 3);
+	return conversion_byte_order_3(tmp_value);
 }
 
 ulint mach_little_read_from_3(
@@ -94,7 +90,9 @@ mach_read_from_2(
 	/*=============*/
 	const char*	b)	/*!< in: pointer to 2 bytes */
 {
-	return conversion_byte_order_2(((ulint)(b[0]) << 8) | (ulint)(b[1]));
+	ulint tmp_value;
+	memcpy(&tmp_value, b, 2);
+	return conversion_byte_order_2(tmp_value);
 }
 
 ulint
