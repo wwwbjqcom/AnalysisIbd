@@ -1,10 +1,12 @@
+#ifndef _BYTE_READ_H_
 
-typedef unsigned long int ulint;
+
+#include "fsp.h"
 
 /********************************************************//**
-The following function is used to fetch data from 4 consecutive
-bytes. The most significant byte is at the lowest address.
-@return ulint integer */
+														  The following function is used to fetch data from 4 consecutive
+														  bytes. The most significant byte is at the lowest address.
+														  @return ulint integer */
 ulint mach_read_from_4(const char* b)	/*!< in: pointer to four bytes */
 {
 	return(((ulint)(b[0]) << 24)
@@ -16,9 +18,9 @@ ulint mach_read_from_4(const char* b)	/*!< in: pointer to four bytes */
 
 
 /********************************************************//**
-The following function is used to fetch data from 3 consecutive
-bytes. The most significant byte is at the lowest address.
-@return ulint integer */
+														  The following function is used to fetch data from 3 consecutive
+														  bytes. The most significant byte is at the lowest address.
+														  @return ulint integer */
 ulint mach_read_from_3(
 	/*=============*/
 	const char*	b)	/*!< in: pointer to 3 bytes */
@@ -32,9 +34,9 @@ ulint mach_read_from_3(
 
 
 /********************************************************//**
-The following function is used to fetch data from 2 consecutive
-bytes. The most significant byte is at the lowest address.
-@return ulint integer */
+														  The following function is used to fetch data from 2 consecutive
+														  bytes. The most significant byte is at the lowest address.
+														  @return ulint integer */
 ulint
 mach_read_from_2(
 	/*=============*/
@@ -44,8 +46,8 @@ mach_read_from_2(
 }
 
 /********************************************************//**
-The following function is used to fetch data from one byte.
-@return ulint integer, >= 0, < 256 */
+														  The following function is used to fetch data from one byte.
+														  @return ulint integer, >= 0, < 256 */
 ulint
 mach_read_from_1(
 	/*=============*/
@@ -53,3 +55,6 @@ mach_read_from_1(
 {
 	return((ulint)(b[0]));
 }
+
+#endif // _BYTE_READ_H_
+

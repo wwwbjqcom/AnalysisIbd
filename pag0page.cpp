@@ -1,5 +1,6 @@
 #include "pag0page.h"
 #include <cstring>
+#include "byte_read.h"
 
 /** The page infimum and supremum of an empty page in ROW_FORMAT=REDUNDANT */
 static const char infimum_supremum_redundant[] = {
