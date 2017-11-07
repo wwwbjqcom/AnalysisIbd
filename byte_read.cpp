@@ -8,9 +8,7 @@ using namespace std;
 														  @return ulint integer */
 ulint mach_read_from_4(const char* b)	/*!< in: pointer to four bytes */
 {
-	ulint tmp_value;
-	memcpy(&tmp_value, b, 4);
-	cout << tmp_value << endl;
+
 	return(((ulint)(b[0]) >> 24)
 		| ((ulint)(b[1]) >> 16)
 		| ((ulint)(b[2]) << 8)
