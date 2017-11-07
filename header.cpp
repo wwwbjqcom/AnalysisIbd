@@ -201,21 +201,7 @@ void Print_content(Fsp_Info *fsp_info_value)
 {
 	printf("INFO: space_id: %d, is_compact: %s, page_ssize: %d, page_size: %d, pages_used: %d ,page_number: %d\n", fsp_info_value->space_id,
 		fsp_info_value->is_com, fsp_info_value->page_ssize, fsp_info_value->page_size, fsp_info_value->fsp_size,fsp_info_value->page_number);
-	/*
-	cout << "page_ssize: " << fsp_info_value->page_ssize << endl;
-	cout << "page_size: " << fsp_info_value->page_size << "bytes" << endl;
-	cout << "size_in_header: " << fsp_info_value->fsp_size << endl;
-	cout << "space_id: " << fsp_info_value->space_id << endl;
-	cout << "id: " << fsp_info_value->fsp_space_id << endl;
-	cout << "is_compact: " << fsp_info_value->is_com << endl;
-	cout << "page_number: " << fsp_info_value->page_number << endl;
-	cout << "free_limit: " << fsp_info_value->free_limit << endl;
-	cout << "free_len: " << fsp_info_value->free_len << endl;
-	cout << "fsp_type_fsp_hdr: " << fsp_info_value->fil_page_type << endl;
-	cout << "fsp_not_used: " << fsp_info_value->fsp_not_used << endl;
-	cout << "fsp_flags: " << fsp_info_value->fsp_space_flags << endl;
-	cout << "fsp_frag_n_used: " << fsp_info_value->fsp_frag_n_used << endl;
-	*/
+
 	printf("FSP ： fsp_flags: %d, fsp_not_used: %d, fsp_frag_n_used: %d\n", fsp_info_value->fsp_space_flags, fsp_info_value->fsp_not_used,
 		fsp_info_value->fsp_frag_n_used);
 
@@ -231,26 +217,6 @@ void Print_content(Fsp_Info *fsp_info_value)
 		fsp_info_value->fsp_full_frag.flst_len, fsp_info_value->fsp_full_frag.flst_first.addr_page, fsp_info_value->fsp_full_frag.flst_first.addr_offset,
 		fsp_info_value->fsp_full_frag.flst_last.addr_page, fsp_info_value->fsp_full_frag.flst_last.addr_offset);
 
-	/*
-	//簇信息
-	cout << "fsp_free->  len: " << fsp_info_value->fsp_free.flst_len;
-	cout << " first -> page_number: " << fsp_info_value->fsp_free.flst_first.addr_page;
-	cout << " page_offset: " << fsp_info_value->fsp_free.flst_first.addr_offset;
-	cout << " last -> page_number: " << fsp_info_value->fsp_free.flst_last.addr_page;
-	cout << " page_offset: " << fsp_info_value->fsp_free.flst_last.addr_offset << endl;
-
-	cout << "fsp_free_frag->  len: " << fsp_info_value->fsp_free_frag.flst_len;
-	cout << " first -> page_number: " << fsp_info_value->fsp_free_frag.flst_first.addr_page;
-	cout << " page_offset: " << fsp_info_value->fsp_free_frag.flst_first.addr_offset;
-	cout << " last -> page_number: " << fsp_info_value->fsp_free_frag.flst_last.addr_page;
-	cout << " page_offset: " << fsp_info_value->fsp_free_frag.flst_last.addr_offset << endl;
-
-	cout << "fsp_full_frag->  len: " << fsp_info_value->fsp_full_frag.flst_len;
-	cout << " first -> page_number: " << fsp_info_value->fsp_full_frag.flst_first.addr_page;
-	cout << " page_offset: " << fsp_info_value->fsp_full_frag.flst_first.addr_offset;
-	cout << " last -> page_number: " << fsp_info_value->fsp_full_frag.flst_last.addr_page;
-	cout << " page_offset: " << fsp_info_value->fsp_full_frag.flst_last.addr_offset << endl;
-	*/
 
 	printf("FSP_SEG: \n");
 	printf("       fsp_seg_free: len: %d, firset_page_number: %d, firset_page_offset: %d, last_page_number: %d, last_page_offset: %d\n",
@@ -261,19 +227,5 @@ void Print_content(Fsp_Info *fsp_info_value)
 		fsp_info_value->fsp_seg_inodes_full.flst_len, fsp_info_value->fsp_seg_inodes_full.flst_first.addr_page, fsp_info_value->fsp_seg_inodes_full.flst_first.addr_offset,
 		fsp_info_value->fsp_seg_inodes_full.flst_last.addr_page, fsp_info_value->fsp_seg_inodes_full.flst_last.addr_offset);
 
-	/*
-	//数据段信息
-	cout << "fsp_seg_free-> len: " << fsp_info_value->fsp_seg_inodes_free.flst_len;
-	cout << " first -> page_number: " << fsp_info_value->fsp_seg_inodes_free.flst_first.addr_page;
-	cout << " page_offset: " << fsp_info_value->fsp_seg_inodes_free.flst_first.addr_offset;
-	cout << " last -> page_number: " << fsp_info_value->fsp_seg_inodes_free.flst_last.addr_page;
-	cout << " page_offset: " << fsp_info_value->fsp_seg_inodes_free.flst_last.addr_offset << endl;
-
-	cout << "fsp_seg_full-> len: " << fsp_info_value->fsp_seg_inodes_full.flst_len;
-	cout << " first -> page_number: " << fsp_info_value->fsp_seg_inodes_full.flst_first.addr_page;
-	cout << " page_offset: " << fsp_info_value->fsp_seg_inodes_full.flst_first.addr_offset;
-	cout << " last -> page_number: " << fsp_info_value->fsp_seg_inodes_full.flst_last.addr_page;
-	cout << " page_offset: " << fsp_info_value->fsp_seg_inodes_full.flst_last.addr_offset << endl;
-	*/
 }
 
