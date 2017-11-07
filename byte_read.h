@@ -1,5 +1,5 @@
-
-#ifndef 1
+#ifndef _BYTE_READ_H_
+#define _BYTE_READ_H
 
 
 #include "fsp.h"
@@ -8,7 +8,7 @@
 														  The following function is used to fetch data from 4 consecutive
 														  bytes. The most significant byte is at the lowest address.
 														  @return ulint integer */
-const ulint mach_read_from_4(const char* b)	/*!< in: pointer to four bytes */
+ulint mach_read_from_4(const char* b)	/*!< in: pointer to four bytes */
 {
 	return(((ulint)(b[0]) << 24)
 		| ((ulint)(b[1]) << 16)
@@ -22,7 +22,7 @@ const ulint mach_read_from_4(const char* b)	/*!< in: pointer to four bytes */
 														  The following function is used to fetch data from 3 consecutive
 														  bytes. The most significant byte is at the lowest address.
 														  @return ulint integer */
-const ulint mach_read_from_3(
+ulint mach_read_from_3(
 	/*=============*/
 	const char*	b)	/*!< in: pointer to 3 bytes */
 {
@@ -38,7 +38,7 @@ const ulint mach_read_from_3(
 														  The following function is used to fetch data from 2 consecutive
 														  bytes. The most significant byte is at the lowest address.
 														  @return ulint integer */
-const ulint
+ulint
 mach_read_from_2(
 	/*=============*/
 	const char*	b)	/*!< in: pointer to 2 bytes */
@@ -49,7 +49,7 @@ mach_read_from_2(
 /********************************************************//**
 														  The following function is used to fetch data from one byte.
 														  @return ulint integer, >= 0, < 256 */
-const ulint
+ulint
 mach_read_from_1(
 	/*=============*/
 	const char*	b)	/*!< in: pointer to byte */
@@ -59,8 +59,10 @@ mach_read_from_1(
 
 
 
-#endif // !1
 
 
 
 
+
+
+#endif // _BYTE_READ_H_
