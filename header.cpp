@@ -4,7 +4,7 @@
 #include <iostream>
 #include <cstring>
 #include "header.h"
-#include "byte_read.h"
+
 using namespace std;
 
 

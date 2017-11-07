@@ -1,6 +1,5 @@
 #include "fsp.h"
 #include "pag0page.h"
-#include "byte_read.h"
 #include <cstring>
 
 /** The page infimum and supremum of an empty page in ROW_FORMAT=REDUNDANT */
