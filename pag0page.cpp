@@ -85,7 +85,14 @@ ulint page_is_comp(
 {
 	ulint tmp_value;
 	memcpy(&tmp_value, page + PAGE_HEADER + PAGE_N_HEAP, 2);
-	return(tmp_value & 0x8000);
+	if (tmp_value & 0x8000)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 /************************************************************//**

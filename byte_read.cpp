@@ -1,7 +1,6 @@
 #include "byte_read.h"
 #include <cstring>
-#include <iostream>
-using namespace std;
+
 
 
 //convert the byte of Big-Endian and Little-Endian

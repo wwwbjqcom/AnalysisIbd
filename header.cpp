@@ -29,16 +29,7 @@ int page_size_t(uint fsp_flags)
 	return size;
 }
 
-//convert the byte of Big-Endian and Little-Endian
-int conversion_byte_order(int num)
-{
-	uint tmp;
-	tmp = ((num & 0x000000FF) << 24) |
-		((num & 0x0000FF00) << 8) |
-		((num & 0x00FF0000) >> 8) |
-		((num & 0xFF000000) >> 24);
-	return tmp;
-}
+
 
 //是否为-1
 int check_unside(uint value)
@@ -51,13 +42,7 @@ int check_unside(uint value)
 		return value;
 }
 
-int conversion_byte_order_two(short num)
-{
-	uint tmp;
-	tmp = ((num & 0x00FF) << 8) |
-		((num & 0xFF00) >> 8);
-	return tmp;
-}
+
 
 //读取4bytes
 int read_int(FILE *file)
@@ -70,23 +55,11 @@ int read_int(FILE *file)
 //获取簇、段的指针信息
 void *read_fsp_content(Fsp_Info *fsp_info_value, char* buffer, uint offset, int type)
 {
-	//uint flst_len, flst_first_page, flst_first_page_offset, flst_last_page, flst_last_page_offset;
 	ulint flst_len = check_unside(mach_read_from_4(buffer + offset + FLST_LEN));
 	ulint flst_first_page = check_unside(mach_read_from_4(buffer + offset + FLST_FIRST + FIL_ADDR_PAGE));
 	ulint flst_first_page_offset = check_unside(mach_read_from_2(buffer + offset + FLST_FIRST + FIL_ADDR_BYTE));
 	ulint flst_last_page = check_unside(mach_read_from_4(buffer + offset + FLST_LAST + FIL_ADDR_PAGE));
 	ulint flst_last_page_offset = check_unside(mach_read_from_2(buffer + offset + FLST_LAST + FIL_ADDR_BYTE));
-	//memcpy(&flst_len, buffer + offset + FLST_LEN, 4);
-	//memcpy(&flst_first_page, buffer + offset + FLST_FIRST + FIL_ADDR_PAGE, 4);
-	//memcpy(&flst_first_page_offset, buffer + offset + FLST_FIRST + FIL_ADDR_BYTE, 2);
-	//memcpy(&flst_last_page, buffer + offset + FLST_LAST + FIL_ADDR_PAGE, 4);
-	//memcpy(&flst_last_page_offset, buffer + offset + FLST_LAST + FIL_ADDR_BYTE, 2);
-
-	//flst_len = check_unside(conversion_byte_order(flst_len));
-	//flst_first_page = check_unside(conversion_byte_order(flst_first_page));
-	//flst_first_page_offset = check_unside(conversion_byte_order_two(flst_first_page_offset));
-	//flst_last_page = check_unside(conversion_byte_order(flst_last_page));
-	//flst_last_page_offset = check_unside(conversion_byte_order_two(flst_last_page_offset));
 
 	if (type == 1)
 	{
@@ -168,58 +141,36 @@ void Enter(char *file_name)
 
 
 	//page_ssize
-	//memcpy(&tmp_value, buffer + FSP_HEADER_OFFSET + FSP_SPACE_FLAGS, 4);
-	//fsp_info_value->page_ssize = FSP_FLAGS_GET_PAGE_SSIZE(tmp_value);
 	fsp_info_value->page_ssize = FSP_FLAGS_GET_PAGE_SSIZE(mach_little_read_from_4(buffer + FSP_HEADER_OFFSET + FSP_SPACE_FLAGS));
 
 	//page_number
-	//memcpy(&tmp_value, buffer + FIL_PAGE_OFFSET, 4);
-	//fsp_info_value->page_number = conversion_byte_order_two(tmp_value);
 	fsp_info_value->page_number = mach_read_from_4(buffer + FIL_PAGE_OFFSET);
 
 	//size_in_header
-	//memcpy(&tmp_value, buffer + FSP_HEADER_OFFSET + FSP_SIZE, 4);
-	//fsp_info_value->fsp_size = conversion_byte_order(tmp_value);
 	fsp_info_value->fsp_size = mach_read_from_4(buffer + FSP_HEADER_OFFSET + FSP_SIZE);
 
 	//space_id
-	//memcpy(&tmp_value, buffer + FSP_HEADER_OFFSET, 4);
-	//fsp_info_value->space_id = conversion_byte_order(tmp_value);
 	fsp_info_value->space_id = mach_read_from_4(buffer + FSP_HEADER_OFFSET);
 
 	//id
-	//memcpy(&tmp_value, buffer + FIL_PAGE_ARCH_LOG_NO_OR_SPACE_ID, 4);
-	//fsp_info_value->fsp_space_id = conversion_byte_order(tmp_value);
 	fsp_info_value->fsp_space_id = mach_read_from_4(buffer + FIL_PAGE_ARCH_LOG_NO_OR_SPACE_ID);
 
 	//free_limit
-	//memcpy(&tmp_value, buffer + FSP_HEADER_OFFSET + FSP_FREE_LIMIT, 4);
-	//fsp_info_value->free_limit = conversion_byte_order(tmp_value);
 	fsp_info_value->free_limit = mach_read_from_4(buffer + FSP_HEADER_OFFSET + FSP_FREE_LIMIT);
 
 	//free_len
-	//memcpy(&tmp_value, buffer + FSP_HEADER_OFFSET + FSP_FREE + FLST_LEN, 4);
-	//fsp_info_value->free_len = conversion_byte_order(tmp_value);
 	fsp_info_value->free_len = mach_read_from_4(buffer + FSP_HEADER_OFFSET + FSP_FREE + FLST_LEN);
 
 	//page_type_fsp_hdr
-	//memcpy(&tmp_value, buffer + FIL_PAGE_TYPE, 2);
-	//fsp_info_value->fil_page_type = conversion_byte_order(tmp_value);
 	fsp_info_value->fil_page_type = mach_read_from_2(buffer + FIL_PAGE_TYPE);
 
 	//fsp_not_used
-	//memcpy(&tmp_value, buffer + FSP_HEADER_OFFSET + FSP_NOT_USED, 4);
-	//fsp_info_value->fsp_not_used = conversion_byte_order(tmp_value);
 	fsp_info_value->fsp_not_used = mach_read_from_4(buffer + FSP_HEADER_OFFSET + FSP_NOT_USED);
 
 	//fsp_flags
-	//memcpy(&tmp_value, buffer + FSP_HEADER_OFFSET + FSP_SPACE_FLAGS, 4);
-	//fsp_info_value->fsp_space_flags = tmp_value;
 	fsp_info_value->fsp_space_flags = mach_little_read_from_4(buffer + FSP_HEADER_OFFSET + FSP_SPACE_FLAGS);
 
 	//fsp_frag_n_used
-	//memcpy(&tmp_value, buffer + FSP_HEADER_OFFSET + FSP_FRAG_N_USED, 4);
-	//fsp_info_value->fsp_frag_n_used = conversion_byte_order(tmp_value);
 	fsp_info_value->fsp_frag_n_used = mach_read_from_4(buffer + FSP_HEADER_OFFSET + FSP_FRAG_N_USED);
 
 	//is_com 是否压缩
@@ -248,6 +199,9 @@ void Enter(char *file_name)
 
 void Print_content(Fsp_Info *fsp_info_value)
 {
+	printf("INFO: space_id: %d, is_compact: %s, page_ssize: %d, page_size: %d, pages_used: %d ,page_number: %d\n", fsp_info_value->space_id,
+		fsp_info_value->is_com, fsp_info_value->page_ssize, fsp_info_value->page_size, fsp_info_value->fsp_size,fsp_info_value->page_number);
+	/*
 	cout << "page_ssize: " << fsp_info_value->page_ssize << endl;
 	cout << "page_size: " << fsp_info_value->page_size << "bytes" << endl;
 	cout << "size_in_header: " << fsp_info_value->fsp_size << endl;
@@ -261,7 +215,23 @@ void Print_content(Fsp_Info *fsp_info_value)
 	cout << "fsp_not_used: " << fsp_info_value->fsp_not_used << endl;
 	cout << "fsp_flags: " << fsp_info_value->fsp_space_flags << endl;
 	cout << "fsp_frag_n_used: " << fsp_info_value->fsp_frag_n_used << endl;
+	*/
+	printf("FSP ： fsp_flags: %d, fsp_not_used: %d, fsp_frag_n_used: %d\n", fsp_info_value->fsp_space_flags, fsp_info_value->fsp_not_used,
+		fsp_info_value->fsp_frag_n_used);
 
+	printf("     fsp_free: len: %d, firset_page_number: %d, firset_page_offset: %d, last_page_number: %d, last_page_offset: %d\n",
+		fsp_info_value->fsp_free.flst_len, fsp_info_value->fsp_free.flst_first.addr_page, fsp_info_value->fsp_free.flst_first.addr_offset,
+		fsp_info_value->fsp_free.flst_last.addr_page, fsp_info_value->fsp_free.flst_last.addr_offset);
+
+	printf("     fsp_free_frag: len: %d, firset_page_number: %d, firset_page_offset: %d, last_page_number: %d, last_page_offset: %d\n",
+		fsp_info_value->fsp_free_frag.flst_len, fsp_info_value->fsp_free_frag.flst_first.addr_page, fsp_info_value->fsp_free_frag.flst_first.addr_offset,
+		fsp_info_value->fsp_free_frag.flst_last.addr_page, fsp_info_value->fsp_free_frag.flst_last.addr_offset);
+
+	printf("     fsp_full_frag: len: %d, firset_page_number: %d, firset_page_offset: %d, last_page_number: %d, last_page_offset: %d\n",
+		fsp_info_value->fsp_full_frag.flst_len, fsp_info_value->fsp_full_frag.flst_first.addr_page, fsp_info_value->fsp_full_frag.flst_first.addr_offset,
+		fsp_info_value->fsp_full_frag.flst_last.addr_page, fsp_info_value->fsp_full_frag.flst_last.addr_offset);
+
+	/*
 	//簇信息
 	cout << "fsp_free->  len: " << fsp_info_value->fsp_free.flst_len;
 	cout << " first -> page_number: " << fsp_info_value->fsp_free.flst_first.addr_page;
@@ -280,8 +250,18 @@ void Print_content(Fsp_Info *fsp_info_value)
 	cout << " page_offset: " << fsp_info_value->fsp_full_frag.flst_first.addr_offset;
 	cout << " last -> page_number: " << fsp_info_value->fsp_full_frag.flst_last.addr_page;
 	cout << " page_offset: " << fsp_info_value->fsp_full_frag.flst_last.addr_offset << endl;
+	*/
 
+	printf("FSP_SEG: \n");
+	printf("       fsp_seg_free: len: %d, firset_page_number: %d, firset_page_offset: %d, last_page_number: %d, last_page_offset: %d\n",
+		fsp_info_value->fsp_seg_inodes_free.flst_len, fsp_info_value->fsp_seg_inodes_free.flst_first.addr_page, fsp_info_value->fsp_seg_inodes_free.flst_first.addr_offset,
+		fsp_info_value->fsp_seg_inodes_free.flst_last.addr_page, fsp_info_value->fsp_seg_inodes_free.flst_last.addr_offset);
 
+	printf("       fsp_seg_full: len: %d, firset_page_number: %d, firset_page_offset: %d, last_page_number: %d, last_page_offset: %d\n",
+		fsp_info_value->fsp_seg_inodes_full.flst_len, fsp_info_value->fsp_seg_inodes_full.flst_first.addr_page, fsp_info_value->fsp_seg_inodes_full.flst_first.addr_offset,
+		fsp_info_value->fsp_seg_inodes_full.flst_last.addr_page, fsp_info_value->fsp_seg_inodes_full.flst_last.addr_offset);
+
+	/*
 	//数据段信息
 	cout << "fsp_seg_free-> len: " << fsp_info_value->fsp_seg_inodes_free.flst_len;
 	cout << " first -> page_number: " << fsp_info_value->fsp_seg_inodes_free.flst_first.addr_page;
@@ -294,5 +274,6 @@ void Print_content(Fsp_Info *fsp_info_value)
 	cout << " page_offset: " << fsp_info_value->fsp_seg_inodes_full.flst_first.addr_offset;
 	cout << " last -> page_number: " << fsp_info_value->fsp_seg_inodes_full.flst_last.addr_page;
 	cout << " page_offset: " << fsp_info_value->fsp_seg_inodes_full.flst_last.addr_offset << endl;
+	*/
 }
 
