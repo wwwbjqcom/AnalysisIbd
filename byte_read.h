@@ -1,5 +1,5 @@
-#include "fsp.h"
 
+typedef unsigned long int ulint;
 
 /********************************************************//**
 The following function is used to fetch data from 4 consecutive
