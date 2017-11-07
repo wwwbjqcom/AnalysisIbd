@@ -2,6 +2,20 @@
 #include <cstring>
 #include <iostream>
 using namespace std;
+
+
+//convert the byte of Big-Endian and Little-Endian
+int conversion_byte_order(int num)
+{
+	uint tmp;
+	tmp = ((num & 0x000000FF) << 24) |
+		((num & 0x0000FF00) << 8) |
+		((num & 0x00FF0000) >> 8) |
+		((num & 0xFF000000) >> 24);
+	return tmp;
+}
+
+
 /********************************************************//**
 														  The following function is used to fetch data from 4 consecutive
 														  bytes. The most significant byte is at the lowest address.
@@ -9,18 +23,12 @@ using namespace std;
 ulint mach_read_from_4(const char* b)	/*!< in: pointer to four bytes */
 {
 
-	return(((ulint)(b[0]) >> 24)
-		| ((ulint)(b[1]) >> 16)
-		| ((ulint)(b[2]) << 8)
-		| (ulint)(b[3]) << 24
-		);
 
-	/*
-	return(((ulint)(b[0]) << 24)
+	return conversion_byte_order((((ulint)(b[0]) << 24)
 		| ((ulint)(b[1]) << 16)
 		| ((ulint)(b[2]) << 8)
 		| (ulint)(b[3])
-		);*/
+		));
 }
 
 ulint mach_little_read_from_4(const char* b)	/*!< in: pointer to four bytes for little ending */
