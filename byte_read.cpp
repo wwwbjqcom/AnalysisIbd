@@ -13,6 +13,15 @@ ulint mach_read_from_4(const char* b)	/*!< in: pointer to four bytes */
 		);
 }
 
+ulint mach_big_read_from_4(const char* b)	/*!< in: pointer to four bytes for big ending */
+{
+	return((ulint)(b[0])
+		| ((ulint)(b[1]) << 8)
+		| ((ulint)(b[2]) << 16)
+		| ((ulint)(b[3]) << 24)
+		);
+}
+
 
 /********************************************************//**
 														  The following function is used to fetch data from 3 consecutive
@@ -29,6 +38,17 @@ ulint mach_read_from_3(
 		);
 }
 
+ulint mach_big_read_from_3(
+	/*=============*/
+	const char*	b)	/*!< in: pointer to 3 bytes for big ending*/
+{
+
+	return((ulint)(b[0])
+		| ((ulint)(b[1]) << 8)
+		| ((ulint)(b[2]) << 16)
+		);
+}
+
 
 /********************************************************//**
 														  The following function is used to fetch data from 2 consecutive
@@ -40,6 +60,14 @@ mach_read_from_2(
 	const char*	b)	/*!< in: pointer to 2 bytes */
 {
 	return(((ulint)(b[0]) << 8) | (ulint)(b[1]));
+}
+
+ulint
+mach_big_read_from_2(
+	/*=============*/
+	const char*	b)	/*!< in: pointer to 2 bytes for big ending */
+{
+	return((ulint)(b[0]) | ((ulint)(b[1]) << 8));
 }
 
 /********************************************************//**
