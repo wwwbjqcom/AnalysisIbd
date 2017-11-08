@@ -87,18 +87,18 @@ void Enter(char *file_name)
 		exit;
 	}
 
-	uint tmp_value;
 	//page_size
 	fseek(fp, FSP_HEADER_OFFSET + FSP_SPACE_FLAGS,0);
-	fread(&tmp_value, 4, 1, fp);
-	fsp_info_value->page_size = page_size_t(&tmp_value);
-	
+	//fread(&tmp_value, 4, 1, fp);
+	//fsp_info_value->page_size = page_size_t(&tmp_value);
+	fsp_info_value->page_size = page_size_t(read_int(fp));
 
 	/* °ÑheaderÒ³¶ÁÈëbuffer*/
 	char *buffer;
 	buffer = new char[fsp_info_value->page_size];
 	fseek(fp, 0, 0);
-	fread(buffer, fsp_info_value->page_size, 1, fp);
+	//fread(buffer, fsp_info_value->page_size, 1, fp);
+	buffer = get_page_value(fp,&(fsp_info_value->page_size));
 
 
 	//page_ssize

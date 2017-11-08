@@ -115,14 +115,15 @@ mach_read_from_1(
 
 
 //读取4bytes
-int read_int(FILE *file)
+uint* read_int(FILE *file)
 {
 	int value;
 	fread(&value, sizeof(int), 1, file);
-	return value;
+	return &value;
 }
 
 
+//获取一页数据
 char* get_page_value(FILE* fp, uint* page_size)
 {
 	char *page;
