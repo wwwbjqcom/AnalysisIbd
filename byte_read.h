@@ -3,6 +3,14 @@
 #include <iostream>
 #include "fsp.h"
 
+
+/********************************************************//**
+														  The following function is used to fetch data from 8 consecutive
+														  bytes. The most significant byte is at the lowest address.
+														  @return 64-bit integer */
+ib_uint64_t mach_read_from_8(
+	/*=============*/
+	const char*	b);	/*!< in: pointer to 8 bytes */
 /********************************************************//**
 														  The following function is used to fetch data from 4 consecutive
 														  bytes. The most significant byte is at the lowest address.

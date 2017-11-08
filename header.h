@@ -29,7 +29,7 @@ struct Fsp_Info
 	uint fil_page_type; //类型
 	uint fsp_space_id; //表空间id
 	uint fsp_not_used; //未使用的簇数量
-	uint fsp_size; //表空间总页数
+	ulint fsp_size; //表空间总页数
 	uint fsp_space_flags; //flags 按位存放space_id、压缩页大小,压缩类型等
 	uint fsp_frag_n_used; //FSP_FREE_FRAG中已经被使用的页面数
 	fsp_info fsp_free; //偏移FSP_FREE + FLST_LEN,写入0占用4bytes,偏移FSP_FREE + FLST_FIRST/FLST_LAST + FIL_ADDR_PAGE的4bytes记录指针信息

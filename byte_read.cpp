@@ -32,6 +32,23 @@ int conversion_byte_order_2(short num)
 }
 
 /********************************************************//**
+														  The following function is used to fetch data from 8 consecutive
+														  bytes. The most significant byte is at the lowest address.
+														  @return 64-bit integer */
+ib_uint64_t mach_read_from_8(
+	/*=============*/
+	const char*	b)	/*!< in: pointer to 8 bytes */
+{
+	ib_uint64_t	u64;
+
+	u64 = mach_read_from_4(b);
+	u64 <<= 32;
+	u64 |= mach_read_from_4(b + 4);
+
+	return(u64);
+}
+
+/********************************************************//**
 														  The following function is used to fetch data from 4 consecutive
 														  bytes. The most significant byte is at the lowest address.
 														  @return ulint integer */

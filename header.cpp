@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cstring>
 #include "header.h"
+#include "scan.h"
 
 
 using namespace std;
@@ -156,7 +157,7 @@ void Enter(char *file_name)
 	delete[]buffer;
 	Print_content(fsp_info_value);
 	/*scan all page*/
-
+	ScanPage(fp, &(fsp_info_value->page_size), &(fsp_info_value->fsp_size));
 
 	fclose(fp);
 	delete[]fsp_info_value;
