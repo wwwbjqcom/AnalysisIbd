@@ -1,6 +1,4 @@
 //例子1：以二进制模式打开并写入文件
-#include <stdio.h>
-#include <stdlib.h>  
 #include <iostream>
 #include <cstring>
 #include "header.h"
