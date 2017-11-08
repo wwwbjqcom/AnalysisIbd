@@ -113,3 +113,20 @@ mach_read_from_1(
 	return((ulint)(b[0]));
 }
 
+
+//∂¡»°4bytes
+int read_int(FILE *file)
+{
+	int value;
+	fread(&value, sizeof(int), 1, file);
+	return value;
+}
+
+
+char* get_page_value(FILE* fp, uint* page_size)
+{
+	char *page;
+	page = new char[*page_size];
+	fread(page, *page_size, 1, fp);
+	return page;
+}

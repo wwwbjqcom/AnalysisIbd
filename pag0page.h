@@ -165,3 +165,5 @@ ulint rec_get_bit_field_1(
 	ulint		mask,	/*!< in: mask used to filter bits */
 	ulint		shift);	/*!< in: shift right applied after masking */
 
+/*return page size*/
+int page_size_t(uint* fsp_flags);

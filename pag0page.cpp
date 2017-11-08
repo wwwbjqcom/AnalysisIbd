@@ -85,7 +85,7 @@ ulint page_is_comp(
 {
 	ulint tmp_value;
 	memcpy(&tmp_value, page + PAGE_HEADER + PAGE_N_HEAP, 2);
-	return(tmp_value & 0x8000)
+	return(tmp_value & 0x8000);
 }
 
 /************************************************************//**
@@ -111,4 +111,20 @@ page_dir_get_n_heap(
 	uint16 tmpvalue;
 	memcpy(&tmpvalue, page + PAGE_HEADER + PAGE_N_HEAP, 2);
 	return(tmpvalue & 0x7fff);
+}
+
+
+//»ñÈ¡page_size
+int page_size_t(uint* fsp_flags)
+{
+	uint ssize = FSP_FLAGS_GET_PAGE_SSIZE(*fsp_flags);
+
+	/* If the logical page size is zero in fsp_flags, then use the
+	legacy 16k page size. */
+	ssize = (0 == ssize) ? UNIV_PAGE_SSIZE_ORIG : ssize;
+
+	/* Convert from a 'log2 minus 9' to a page size in bytes. */
+	const uint	size = ((UNIV_ZIP_SIZE_MIN >> 1) << ssize);
+
+	return size;
 }

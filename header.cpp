@@ -10,27 +10,6 @@ using namespace std;
 
 
 
-
-
-
-
-//获取page_size
-int page_size_t(uint fsp_flags)
-{
-	uint	ssize = FSP_FLAGS_GET_PAGE_SSIZE(fsp_flags);
-
-	/* If the logical page size is zero in fsp_flags, then use the
-	legacy 16k page size. */
-	ssize = (0 == ssize) ? UNIV_PAGE_SSIZE_ORIG : ssize;
-
-	/* Convert from a 'log2 minus 9' to a page size in bytes. */
-	const uint	size = ((UNIV_ZIP_SIZE_MIN >> 1) << ssize);
-
-	return size;
-}
-
-
-
 //是否为-1
 int check_unside(uint value)
 {
@@ -42,15 +21,6 @@ int check_unside(uint value)
 		return value;
 }
 
-
-
-//读取4bytes
-int read_int(FILE *file)
-{
-	int value;
-	fread(&value, sizeof(int), 1, file);
-	return value;
-}
 
 //获取簇、段的指针信息
 void *read_fsp_content(Fsp_Info *fsp_info_value, char* buffer, uint offset, int type)
@@ -107,13 +77,6 @@ void *read_fsp_content(Fsp_Info *fsp_info_value, char* buffer, uint offset, int 
 
 
 
-char* get_page_value(FILE* fp,uint* page_size)
-{
-	char *page;
-	page = new char[*page_size];
-	fread(page, *page_size, 1, fp);
-	return page;
-}
 
 
 void Enter(char *file_name)
@@ -130,7 +93,7 @@ void Enter(char *file_name)
 	//page_size
 	fseek(fp, FSP_HEADER_OFFSET + FSP_SPACE_FLAGS,0);
 	fread(&tmp_value, 4, 1, fp);
-	fsp_info_value->page_size = page_size_t(tmp_value);
+	fsp_info_value->page_size = page_size_t(&tmp_value);
 	
 
 	/* 把header页读入buffer*/
