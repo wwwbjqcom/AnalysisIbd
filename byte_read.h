@@ -36,7 +36,7 @@ ulint mach_read_from_1(const char* b);	/*!< in: pointer to byte */
 
 
 										
-uint* read_int(FILE *file); //¶ÁÈ¡4bytes
+uint read_int(FILE *file); //¶ÁÈ¡4bytes
 
 
 char* get_page_value(FILE* fp, uint* page_size);

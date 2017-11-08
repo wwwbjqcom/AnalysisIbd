@@ -115,11 +115,11 @@ mach_read_from_1(
 
 
 //∂¡»°4bytes
-uint* read_int(FILE *file)
+uint read_int(FILE *file)
 {
-	int value;
+	uint value;
 	fread(&value, sizeof(int), 1, file);
-	return &value;
+	return value;
 }
 
 

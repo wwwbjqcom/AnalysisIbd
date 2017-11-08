@@ -91,7 +91,8 @@ void Enter(char *file_name)
 	fseek(fp, FSP_HEADER_OFFSET + FSP_SPACE_FLAGS,0);
 	//fread(&tmp_value, 4, 1, fp);
 	//fsp_info_value->page_size = page_size_t(&tmp_value);
-	fsp_info_value->page_size = page_size_t(read_int(fp));
+	uint tmp_value = read_int(fp);
+	fsp_info_value->page_size = page_size_t(&tmp_value);
 
 	/* °ÑheaderÒ³¶ÁÈëbuffer*/
 	char *buffer;
@@ -153,8 +154,11 @@ void Enter(char *file_name)
 
 
 	delete[]buffer;
-	fclose(fp);
 	Print_content(fsp_info_value);
+	/*scan all page*/
+
+
+	fclose(fp);
 	delete[]fsp_info_value;
 }
 
@@ -163,7 +167,7 @@ void Print_content(Fsp_Info *fsp_info_value)
 	printf("INFO: space_id: %d, is_compact: %s, page_ssize: %d, page_size: %d, pages_used: %d ,page_number: %d\n", fsp_info_value->space_id,
 		fsp_info_value->is_com, fsp_info_value->page_ssize, fsp_info_value->page_size, fsp_info_value->fsp_size,fsp_info_value->page_number);
 
-	printf("FSP £º fsp_flags: %d, fsp_not_used: %d, fsp_frag_n_used: %d\n", fsp_info_value->fsp_space_flags, fsp_info_value->fsp_not_used,
+	printf("FSP :  fsp_flags: %d, fsp_not_used: %d, fsp_frag_n_used: %d\n", fsp_info_value->fsp_space_flags, fsp_info_value->fsp_not_used,
 		fsp_info_value->fsp_frag_n_used);
 
 	printf("       fsp_free: len: %d, firset_page_number: %d, firset_page_offset: %d, last_page_number: %d, last_page_offset: %d\n",

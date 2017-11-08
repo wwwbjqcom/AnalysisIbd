@@ -41,23 +41,12 @@ struct Fsp_Info
 	uint fsp_seg_id;//偏移FSP_SEG_ID记录段ID，占用1bytes，数据段ID
 };
 
-//读取page数据
-char* get_page_value(FILE* fp, uint* page_size);
 
-void Print_content(Fsp_Info *fsp_info_value);
 
-//获取page_size
-int page_size_t(uint fsp_flags);
-
-//convert the byte of Big-Endian and Little-Endian
-int conversion_byte_order(int num);
 
 int check_unside(uint value);
 
-int conversion_byte_order_two(short num);
 
-//读取4bytes
-int read_int(FILE *file);
 
 //获取簇、段的指针信息
 void *read_fsp_content(Fsp_Info *fsp_info_value, char* buffer, uint offset, int type);
@@ -66,5 +55,3 @@ void Enter(char *file_name);
 
 void Print_content(Fsp_Info *fsp_info_value);
 
-//读取页数据
-char* get_page_value(FILE* fp, uint* page_size);
