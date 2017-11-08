@@ -1,10 +1,11 @@
 #include "scan.h"
 #include "byte_read.h"
+#include <cstring>
 
 
 void PrintPageInfo(page_content* page_info)
 {
-	printf("page_no: %d, page_type: %d, page_lsn: %d, page_level:%d",page_info->page_no,page_info->page_type,page_info->page_lsn,page_info->page_level);
+	printf("page_no: %d, page_type: %d, page_lsn: %d, page_level:%d\n",page_info->page_no,page_info->page_type,page_info->page_lsn,page_info->page_level);
 }
 
 
