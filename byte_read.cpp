@@ -4,20 +4,6 @@
 
 
 //convert the byte of Big-Endian and Little-Endian
-ib_uint64_t conversion_byte_order_8(char num)
-{
-
-	char tmp;
-	tmp = ((num & 0x00000000000000FF) << 56) |
-		((num & 0x000000000000FF00) << 40) |
-		((num & 0x0000000000FF0000) << 24) |
-		((num & 0x00000000FF000000) << 8) |
-		((num & 0xFF00000000000000) >> 56) |
-		((num & 0x00FF000000000000) >> 40) |
-		((num & 0x0000FF0000000000) >> 24) |
-		((num & 0x000000FF00000000) >> 8);
-	return tmp;
-}
 
 
 int conversion_byte_order_4(int num)
