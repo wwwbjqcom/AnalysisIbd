@@ -15,10 +15,10 @@ typedef struct {
 
 
 typedef struct {
-	uchar page_no;
-	uchar page_type;
-	uchar page_lsn;
-	uchar slots;
+	ulint page_no;
+	ulint page_type;
+	ulint page_lsn;
+	ulint slots;
 	char page_direction;
 	uint records;
 	uint page_level;
