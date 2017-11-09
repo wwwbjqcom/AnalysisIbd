@@ -52,7 +52,16 @@ ib_uint64_t mach_read_from_8(
 	u64 <<= 32;
 	u64 |= mach_read_from_4(b + 4);
 
-	return(u64);
+	return(
+			(ulint)((unsigned char)(b[0])) << 56
+		| (ulint)((unsigned char)(b[1])) << 48
+		| (ulint)((unsigned char)(b[2])) << 40
+		| (ulint)((unsigned char)(b[3])) << 32
+		| (ulint)((unsigned char)(b[4])) << 24
+		| (ulint)((unsigned char)(b[5])) << 16
+		| (ulint)((unsigned char)(b[6])) << 8
+		| (ulint)(unsigned char)(b[7])
+		);
 }
 
 /********************************************************//**
