@@ -66,9 +66,9 @@ uint mach_read_from_4(const char* b)	/*!< in: pointer to four bytes */
 	//memcpy(&tmp_value, b, 4);
 	//return conversion_byte_order_4(tmp_value);
 	
-	return ( ((uint)(b[0]) << 24)
-		| ((uint)(b[1]) << 16)
-		| ((uint)(b[2]) << 8)
+	return ( ((uint)((b[0]) << 24))
+		| ((uint)((b[1]) << 16))
+		| ((uint)((b[2]) << 8))
 		| (uint)(b[3])
 		);
 }

@@ -15,7 +15,7 @@ typedef struct {
 
 
 typedef struct {
-	uchar page_no[4];
+	ulint page_no;
 	ulint page_type;
 	ulint page_lsn;
 	ulint slots;
