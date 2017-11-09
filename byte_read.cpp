@@ -59,17 +59,17 @@ ib_uint64_t mach_read_from_8(
 														  The following function is used to fetch data from 4 consecutive
 														  bytes. The most significant byte is at the lowest address.
 														  @return ulint integer */
-uint mach_read_from_4(const char* b)	/*!< in: pointer to four bytes */
+ulint mach_read_from_4(const char* b)	/*!< in: pointer to four bytes */
 {
 
 	//ulint tmp_value;
 	//memcpy(&tmp_value, b, 4);
 	//return conversion_byte_order_4(tmp_value);
 	
-	return ( ((uint)((b[0]) << 24))
-		| ((uint)((b[1]) << 16))
-		| ((uint)((b[2]) << 8))
-		| (uint)(b[3])
+	return ( ((ulint)((unsigned char)(b[0]) << 24))
+		| ((ulint)((unsigned char)(b[1]) << 16))
+		| ((ulint)((unsigned char)(b[2]) << 8))
+		| (ulint)(unsigned char)(b[3])
 		);
 }
 
