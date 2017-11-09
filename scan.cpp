@@ -5,7 +5,7 @@
 
 void PrintPageInfo(page_content* page_info)
 {
-	printf("page_no: %u, page_type: %d, page_lsn: %u, page_level:%d\n",page_info->page_no,page_info->page_type,page_info->page_lsn,page_info->page_level);
+	printf("page_no: %u, page_type: %d, page_lsn: %u, page_level:%d\n",(page_info->page_no,page_info->page_type),page_info->page_lsn,page_info->page_level);
 }
 
 

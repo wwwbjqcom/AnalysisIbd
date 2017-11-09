@@ -13,14 +13,14 @@ typedef struct {
 
 
 typedef struct {
-	ulint page_no;
-	ulint page_type;
+	unsigned char page_no;
+	uint page_type;
 	ulint page_lsn;
 	uint slots;
 	char page_direction;
 	uint records;
 	uint page_level;
-	ulint index_id;
+	uint index_id;
 }page_content;
 
 int ScanPage(FILE* fp, uint* page_size, ulint* pages);
