@@ -8,7 +8,7 @@
 														  The following function is used to fetch data from 8 consecutive
 														  bytes. The most significant byte is at the lowest address.
 														  @return 64-bit integer */
-ib_uint64_t mach_read_from_8(
+char mach_read_from_8(
 	/*=============*/
 	const char*	b);	/*!< in: pointer to 8 bytes */
 /********************************************************//**

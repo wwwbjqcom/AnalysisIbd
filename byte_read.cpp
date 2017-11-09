@@ -4,10 +4,10 @@
 
 
 //convert the byte of Big-Endian and Little-Endian
-int conversion_byte_order_8(ib_uint64_t num)
+int conversion_byte_order_8(char num)
 {
 
-	ib_uint64_t tmp;
+	char tmp;
 	tmp = ((num & 0x00000000000000FF) << 56) |
 		((num & 0x000000000000FF00) << 40) |
 		((num & 0x0000000000FF0000) << 24) |
@@ -51,7 +51,7 @@ int conversion_byte_order_2(short num)
 														  The following function is used to fetch data from 8 consecutive
 														  bytes. The most significant byte is at the lowest address.
 														  @return 64-bit integer */
-ib_uint64_t mach_read_from_8(
+char mach_read_from_8(
 	/*=============*/
 	const char*	b)	/*!< in: pointer to 8 bytes */
 {
@@ -60,7 +60,7 @@ ib_uint64_t mach_read_from_8(
 	memcpy(&tmp_value, b, 8);
 	return conversion_byte_order_8(tmp_value);
 	*/
-	ib_uint64_t	u64;
+	char	u64;
 
 	u64 = mach_read_from_4(b);
 	u64 <<= 32;
@@ -79,13 +79,11 @@ ulint mach_read_from_4(const char* b)	/*!< in: pointer to four bytes */
 	//ulint tmp_value;
 	//memcpy(&tmp_value, b, 4);
 	//return conversion_byte_order_4(tmp_value);
-	int value;
-	value = (((ulint)(b[0]) << 24)
+	return (((ulint)(b[0]) << 24)
 		| ((ulint)(b[1]) << 16)
 		| ((ulint)(b[2]) << 8)
 		| (ulint)(b[3])
 		);
-	return conversion_byte_order_4(value);
 }
 
 ulint mach_little_read_from_4(const char* b)	/*!< in: pointer to four bytes for little ending */
