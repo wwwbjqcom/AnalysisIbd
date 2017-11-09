@@ -4,7 +4,7 @@
 
 
 //convert the byte of Big-Endian and Little-Endian
-int conversion_byte_order_8(char num)
+ib_uint64_t conversion_byte_order_8(char num)
 {
 
 	char tmp;
@@ -51,7 +51,7 @@ int conversion_byte_order_2(short num)
 														  The following function is used to fetch data from 8 consecutive
 														  bytes. The most significant byte is at the lowest address.
 														  @return 64-bit integer */
-char mach_read_from_8(
+ib_uint64_t mach_read_from_8(
 	/*=============*/
 	const char*	b)	/*!< in: pointer to 8 bytes */
 {
@@ -60,7 +60,7 @@ char mach_read_from_8(
 	memcpy(&tmp_value, b, 8);
 	return conversion_byte_order_8(tmp_value);
 	*/
-	char	u64;
+	ib_uint64_t	u64;
 
 	u64 = mach_read_from_4(b);
 	u64 <<= 32;
