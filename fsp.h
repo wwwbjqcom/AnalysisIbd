@@ -78,7 +78,7 @@ FSP_FREE_LIMIT at a time */
 typedef unsigned long int ulint;
 typedef unsigned int uint;
 typedef unsigned short uint16;
-typedef unsigned long int ib_uint64_t;
+typedef unsigned long long int ib_uint64_t;
 
 #define ib_page_t unsigned char;
 #define page_t	   ib_page_t

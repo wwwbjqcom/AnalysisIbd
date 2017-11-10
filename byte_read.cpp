@@ -37,16 +37,12 @@ ulint conversion_byte_order_2(short num)
 														  The following function is used to fetch data from 8 consecutive
 														  bytes. The most significant byte is at the lowest address.
 														  @return 64-bit integer */
-ulint mach_read_from_8(
+ib_uint64_t mach_read_from_8(
 	/*=============*/
 	const byte*	b)	/*!< in: pointer to 8 bytes */
 {
-	/*
-	ib_uint64_t tmp_value;
-	memcpy(&tmp_value, b, 8);
-	return conversion_byte_order_8(tmp_value);
-	*/
-	ulint	u64;
+
+	ib_uint64_t	u64;
 
 	u64 = mach_read_from_4(b);
 	u64 <<= 32;
@@ -61,11 +57,6 @@ ulint mach_read_from_8(
 														  @return ulint integer */
 ulint mach_read_from_4(const byte* b)	/*!< in: pointer to four bytes */
 {
-
-	//ulint tmp_value;
-	//memcpy(&tmp_value, b, 4);
-	//return conversion_byte_order_4(tmp_value);
-	
 	return ( ((ulint)((b[0]) << 24))
 		| ((ulint)((b[1]) << 16))
 		| ((ulint)((b[2]) << 8))
@@ -73,15 +64,6 @@ ulint mach_read_from_4(const byte* b)	/*!< in: pointer to four bytes */
 		);
 }
 
-ulint mach_little_read_from_4(const byte* b)	/*!< in: pointer to four bytes for little ending */
-{
-	
-	return((ulint)(b[0])
-		| ((ulint)(b[1]) << 8)
-		| ((ulint)(b[2]) << 16)
-		| ((ulint)(b[3]) << 24)
-		);
-}
 
 
 /********************************************************//**
@@ -93,19 +75,9 @@ ulint mach_read_from_3(
 	const char*	b)	/*!< in: pointer to 3 bytes */
 {
 
-	ulint tmp_value;
-	memcpy(&tmp_value, b, 3);
-	return conversion_byte_order_3(tmp_value);
-}
-
-ulint mach_little_read_from_3(
-	/*=============*/
-	const byte*	b)	/*!< in: pointer to 3 bytes for little ending*/
-{
-
-	return((ulint)(b[0])
-		| ((ulint)(b[1]) << 8)
-		| ((ulint)(b[2]) << 16)
+	return (((ulint)((b[0]) << 16))
+		| ((ulint)((b[1]) << 8))
+		| (ulint)(b[2])
 		);
 }
 
@@ -119,18 +91,9 @@ mach_read_from_2(
 	/*=============*/
 	const byte*	b)	/*!< in: pointer to 2 bytes */
 {
-	ulint tmp_value;
-	memcpy(&tmp_value, b, 2);
-	return conversion_byte_order_2(tmp_value);
+	return((ulint)(b[0]) << 8) | (ulint)(b[1]);
 }
 
-ulint
-mach_little_read_from_2(
-	/*=============*/
-	const byte*	b)	/*!< in: pointer to 2 bytes for little ending */
-{
-	return((ulint)(b[0]) | ((ulint)(b[1]) << 8));
-}
 
 /********************************************************//**
 														  The following function is used to fetch data from one byte.
