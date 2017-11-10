@@ -22,7 +22,7 @@ int check_unside(uint value)
 
 
 //获取簇、段的指针信息
-void *read_fsp_content(Fsp_Info *fsp_info_value, char* buffer, uint offset, int type)
+void *read_fsp_content(Fsp_Info *fsp_info_value, byte* buffer, uint offset, int type)
 {
 	ulint flst_len = check_unside(mach_read_from_4(buffer + offset + FLST_LEN));
 	ulint flst_first_page = check_unside(mach_read_from_4(buffer + offset + FLST_FIRST + FIL_ADDR_PAGE));
@@ -96,11 +96,11 @@ void Enter(char *file_name)
 	fsp_info_value->page_size = page_size_t(&tmp_value);
 
 	/* 把header页读入buffer*/
-	char *buffer;
-	buffer = new char[fsp_info_value->page_size];
+	byte *buffer;
+	buffer = new byte[fsp_info_value->page_size];
 	fseek(fp, 0, 0);
 	//fread(buffer, fsp_info_value->page_size, 1, fp);
-	buffer = get_page_value(fp,&(fsp_info_value->page_size));
+	get_page_value(buffer,fp,&(fsp_info_value->page_size));
 
 
 	//page_ssize

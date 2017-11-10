@@ -127,26 +127,26 @@ directory. */
 /************************************************************//**
 			TRUE if the record is on a page in compact format.
 			@return nonzero if in compact format */
-ulint page_is_comp(char*	page);
+ulint page_is_comp(byte*	page);
 
 /************************************************************//**
 	Determine whether the page is a B-tree leaf.
 	@return true if the page is a B-tree leaf (PAGE_LEVEL = 0) */
-bool page_is_leaf(const char*	page);	/*!< in: page */
+bool page_is_leaf(const byte*	page);	/*!< in: page */
 
 
 /*************************************************************//**
 					Gets the number of records in the heap.
 					@return number of user records */
 ulint
-page_dir_get_n_heap(const char*	page);	/*!< in: index page */
+page_dir_get_n_heap(const byte*	page);	/*!< in: index page */
 
 
 /******************************************************//**
 The following function is used to get the number of records owned by the
 previous directory record.
 @return number of owned records */
-ulint rec_get_n_owned_new(const char*	rec);	/*!< in: new-style physical record */
+ulint rec_get_n_owned_new(const byte*	rec);	/*!< in: new-style physical record */
 
 /******************************************************//**
 The following function is used to get the number of records owned by the
@@ -154,13 +154,13 @@ previous directory record.
 @return number of owned records */
 ulint rec_get_n_owned_old(
 	/*================*/
-	const char*	rec);	/*!< in: old-style physical record */
+	const byte*	rec);	/*!< in: old-style physical record */
 
 /******************************************************//**
 					Gets a bit field from within 1 byte. */
 ulint rec_get_bit_field_1(
 	/*================*/
-	const char*	rec,	/*!< in: pointer to record origin */
+	const byte*	rec,	/*!< in: pointer to record origin */
 	ulint		offs,	/*!< in: offset from the origin down */
 	ulint		mask,	/*!< in: mask used to filter bits */
 	ulint		shift);	/*!< in: shift right applied after masking */

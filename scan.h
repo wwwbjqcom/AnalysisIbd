@@ -3,7 +3,7 @@
 #include <iostream>
 
 
-#define uchar unsigned char
+#define byte unsigned char
 /*索引基本信息*/
 typedef struct {
 	char index_name;
@@ -29,4 +29,4 @@ int ScanPage(FILE* fp, uint* page_size, ulint* pages);
 
 void PrintPageInfo(page_content* page_info);
 
-void ScanPageContent(char* buffer);
+void ScanPageContent(byte* buffer);

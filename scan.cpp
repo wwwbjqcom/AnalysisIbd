@@ -9,7 +9,7 @@ void PrintPageInfo(page_content* page_info)
 }
 
 
-void ScanPageContent(char* buffer)
+void ScanPageContent(byte* buffer)
 {
 	page_content* page_info = new page_content;
 	page_info->page_no = mach_read_from_4(buffer + FIL_PAGE_OFFSET);
@@ -29,11 +29,11 @@ int ScanPage(FILE* fp,uint* page_size,ulint* pages)
 {
 
 	fseek(fp,(*page_size) * 2 , 0);
-	char *buffer;
-	buffer = new char[*page_size];
+	byte *buffer;
+	buffer = new byte[*page_size];
 	for (ulint i = 3; i <= *pages; i++)
 	{
-		buffer = get_page_value(fp, page_size);
+		get_page_value(buffer,fp, page_size);
 		ScanPageContent(buffer);
 
 		memset(buffer,'\0',*page_size);
