@@ -5,7 +5,8 @@
 
 void PrintPageInfo(page_content* page_info)
 {
-	printf("page_no: %lu, page_type: %lu, page_lsn: %lu, page_level:%lu\n",page_info->page_no,page_info->page_type,page_info->page_lsn,page_info->page_level);
+	printf("page_no: %lu, page_type: %lu, page_lsn: %lu, page_level:%lu, index_id:%lu, records:%lu, slots:%lu\n",
+		page_info->page_no,page_info->page_type,page_info->page_lsn,page_info->page_level,page_info->index_id,page_info->records,page_info->slots);
 }
 
 
@@ -19,6 +20,12 @@ void ScanPageContent(byte* buffer)
 	page_info->page_lsn = mach_read_from_8(buffer + FIL_PAGE_LSN);
 
 	page_info->page_level = mach_read_from_2(buffer + FIL_PAGE_OFFSET + PAGE_LEVEL);
+
+	page_info->index_id = mach_read_from_8(buffer + FIL_PAGE_OFFSET + PAGE_INDEX_ID);
+
+	page_info->records = mach_read_from_2(buffer + FIL_PAGE_OFFSET + PAGE_N_RECS);
+
+	page_info->slots = mach_read_from_2(buffer + FIL_PAGE_OFFSET + PAGE_N_DIR_SLOTS);
 
 	PrintPageInfo(page_info);
 

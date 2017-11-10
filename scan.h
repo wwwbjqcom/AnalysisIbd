@@ -19,7 +19,7 @@ typedef struct {
 	ulint page_type;
 	ulint page_lsn;
 	ulint slots;
-	char page_direction;
+	ulint page_direction;
 	uint records;
 	uint page_level;
 	uint index_id;
