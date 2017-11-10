@@ -88,8 +88,8 @@ ulint mach_read_from_3(
 	const byte*	b)	/*!< in: pointer to 3 bytes */
 {
 
-	return((ulint)(b[0]) >> 16
-		| ((ulint)(b[1]) >> 8)
+	return((ulint)(b[0]) << 16
+		| ((ulint)(b[1]) << 8)
 		| ((ulint)(b[2]))
 		);
 }
@@ -115,7 +115,7 @@ mach_read_from_2(
 	/*=============*/
 	const byte*	b)	/*!< in: pointer to 2 bytes */
 {
-	return((ulint)(b[0]) >> 8 | ((ulint)(b[1])));
+	return((ulint)(b[0]) << 8 | ((ulint)(b[1])));
 }
 
 ulint

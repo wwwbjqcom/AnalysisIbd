@@ -1,10 +1,13 @@
 #include "scan.h"
 #include "byte_read.h"
 #include <cstring>
+#include <iostream>
+using namespace std;
 
 
 void PrintPageInfo(page_content* page_info)
 {
+	cout << page_info->page_lsn << endl;
 	printf("page_no: %u, page_type: %d, page_lsn: %u, page_level:%d\n",page_info->page_no,page_info->page_type,page_info->page_lsn,page_info->page_level);
 }
 
