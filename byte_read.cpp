@@ -47,12 +47,12 @@ ib_uint64_t mach_read_from_8(
 	return conversion_byte_order_8(tmp_value);
 	*/
 	ib_uint64_t	u64;
+	uint u32;
 
 	u64 = mach_read_from_4(b);
 	u64 <<= 32;
-	u64 |= mach_read_from_4(b + 4);
-
-	return u64;
+	u32 = mach_read_from_4(b + 4);
+	return(u64 | u32);
 }
 
 /********************************************************//**
