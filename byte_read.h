@@ -18,6 +18,7 @@ ib_uint64_t mach_read_from_8(
 														  @return ulint integer */
 ulint mach_read_from_4(const byte* b); /*!< in: pointer to 4 bytes */
 
+ulint mach_little_read_from_4(const byte* b);/*!< in: pointer to 4 bytes for little ending */
 
 
 /********************************************************//**
@@ -26,6 +27,7 @@ ulint mach_read_from_4(const byte* b); /*!< in: pointer to 4 bytes */
 														  @return ulint integer */
 ulint mach_read_from_3(const byte* b);	/*!< in: pointer to 3 bytes */
 
+ulint mach_little_read_from_3(const byte* b); /*!< in: pointer to 3 bytes for little ending */
 
 								/********************************************************//**
 																						  The following function is used to fetch data from 2 consecutive
@@ -33,6 +35,7 @@ ulint mach_read_from_3(const byte* b);	/*!< in: pointer to 3 bytes */
 																						  @return ulint integer */
 ulint mach_read_from_2(const byte* b);	/*!< in: pointer to 2 bytes */
 
+ulint mach_little_read_from_2(const byte* b); /*!< in: pointer to 2 bytes for little ending */
 
 					/********************************************************//**
 																			  The following function is used to fetch data from one byte.

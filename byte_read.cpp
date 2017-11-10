@@ -41,7 +41,11 @@ ib_uint64_t mach_read_from_8(
 	/*=============*/
 	const byte*	b)	/*!< in: pointer to 8 bytes */
 {
-
+	/*
+	ib_uint64_t tmp_value;
+	memcpy(&tmp_value, b, 8);
+	return conversion_byte_order_8(tmp_value);
+	*/
 	ib_uint64_t	u64;
 
 	u64 = mach_read_from_4(b);
@@ -64,6 +68,15 @@ ulint mach_read_from_4(const byte* b)	/*!< in: pointer to four bytes */
 		);
 }
 
+ulint mach_little_read_from_4(const byte* b)	/*!< in: pointer to four bytes for little ending */
+{
+	
+	return((ulint)(b[0])
+		| ((ulint)(b[1]) << 8)
+		| ((ulint)(b[2]) << 16)
+		| ((ulint)(b[3]) << 24)
+		);
+}
 
 
 /********************************************************//**
@@ -72,12 +85,23 @@ ulint mach_read_from_4(const byte* b)	/*!< in: pointer to four bytes */
 														  @return ulint integer */
 ulint mach_read_from_3(
 	/*=============*/
-	const char*	b)	/*!< in: pointer to 3 bytes */
+	const byte*	b)	/*!< in: pointer to 3 bytes */
 {
 
-	return (((ulint)((b[0]) << 16))
-		| ((ulint)((b[1]) << 8))
-		| (ulint)(b[2])
+	return((ulint)(b[0]) >> 16
+		| ((ulint)(b[1]) >> 8)
+		| ((ulint)(b[2]))
+		);
+}
+
+ulint mach_little_read_from_3(
+	/*=============*/
+	const byte*	b)	/*!< in: pointer to 3 bytes for little ending*/
+{
+
+	return((ulint)(b[0])
+		| ((ulint)(b[1]) << 8)
+		| ((ulint)(b[2]) << 16)
 		);
 }
 
@@ -91,9 +115,16 @@ mach_read_from_2(
 	/*=============*/
 	const byte*	b)	/*!< in: pointer to 2 bytes */
 {
-	return((ulint)(b[0]) << 8) | (ulint)(b[1]);
+	return((ulint)(b[0]) >> 8 | ((ulint)(b[1])));
 }
 
+ulint
+mach_little_read_from_2(
+	/*=============*/
+	const byte*	b)	/*!< in: pointer to 2 bytes for little ending */
+{
+	return((ulint)(b[0]) | ((ulint)(b[1]) << 8));
+}
 
 /********************************************************//**
 														  The following function is used to fetch data from one byte.

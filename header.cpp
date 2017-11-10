@@ -103,8 +103,8 @@ void Enter(char *file_name)
 	get_page_value(buffer,fp,&(fsp_info_value->page_size));
 
 
-	//page_ssize aa
-	fsp_info_value->page_ssize = FSP_FLAGS_GET_PAGE_SSIZE(mach_read_from_4(buffer + FSP_HEADER_OFFSET + FSP_SPACE_FLAGS));
+	//page_ssize
+	fsp_info_value->page_ssize = FSP_FLAGS_GET_PAGE_SSIZE(mach_little_read_from_4(buffer + FSP_HEADER_OFFSET + FSP_SPACE_FLAGS));
 
 	//page_number
 	fsp_info_value->page_number = mach_read_from_4(buffer + FIL_PAGE_OFFSET);
@@ -130,8 +130,8 @@ void Enter(char *file_name)
 	//fsp_not_used
 	fsp_info_value->fsp_not_used = mach_read_from_4(buffer + FSP_HEADER_OFFSET + FSP_NOT_USED);
 
-	//fsp_flags  aa
-	fsp_info_value->fsp_space_flags = mach_read_from_4(buffer + FSP_HEADER_OFFSET + FSP_SPACE_FLAGS);
+	//fsp_flags
+	fsp_info_value->fsp_space_flags = mach_little_read_from_4(buffer + FSP_HEADER_OFFSET + FSP_SPACE_FLAGS);
 
 	//fsp_frag_n_used
 	fsp_info_value->fsp_frag_n_used = mach_read_from_4(buffer + FSP_HEADER_OFFSET + FSP_FRAG_N_USED);
