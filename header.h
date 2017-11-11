@@ -36,8 +36,8 @@ struct Fsp_Info
 					   //FSP_FREE + FLST_FIRST/FLST_LAST + FIL_ADDR_BYTE占用2bytes的offset信息， 记录表空间中所有空闲簇的链表信息
 	fsp_info fsp_free_frag;//与FSP_FREE类似，只是这是记录的簇为已经部分使用的，即不是空簇又不是满簇的链表
 	fsp_info fsp_full_frag;//同上，字面意思就清楚存储的为满簇
-	fsp_info fsp_seg_inodes_full;//同上，用于存放管理数据段的页面链表，该指针为已满的数据页链表
-	fsp_info fsp_seg_inodes_free;//同上，存放指针为半满存放数据段管理信息的数据页链表
+	fsp_info fsp_seg_inodes_full;//同上，用于存放管理数据段的页面链表，该指针为已满的数据段链表
+	fsp_info fsp_seg_inodes_free;//同上，存放指针为半满存放数据段管理信息的数据段链表
 	uint fsp_seg_id;//偏移FSP_SEG_ID记录段ID，占用1bytes，数据段ID
 };
 
