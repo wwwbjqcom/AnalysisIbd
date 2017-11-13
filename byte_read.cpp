@@ -55,6 +55,20 @@ ib_uint64_t mach_read_from_8(
 	return(u64 | u32);
 }
 
+/*******************************************************//**
+														 The following function is used to store data in four consecutive
+														 bytes. We store the most significant byte to the lowest address. */
+void mach_write_to_4(
+	/*============*/
+	byte*	b,	/*!< in: pointer to four bytes where to store */
+	ulint	n)	/*!< in: ulint integer to be stored */
+{
+	b[0] = (byte)(n >> 24);
+	b[1] = (byte)(n >> 16);
+	b[2] = (byte)(n >> 8);
+	b[3] = (byte)n;
+}
+
 /********************************************************//**
 														  The following function is used to fetch data from 4 consecutive
 														  bytes. The most significant byte is at the lowest address.

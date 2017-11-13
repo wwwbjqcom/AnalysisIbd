@@ -157,7 +157,8 @@ void Enter(char *file_name)
 	delete[]buffer;
 	Print_content(fsp_info_value);
 	/*scan all page*/
-	ScanPage(fp, &(fsp_info_value->page_size), &(fsp_info_value->fsp_size));
+	ulint scan_type = 1;
+	ScanPage(fp, &(fsp_info_value->page_size), &(fsp_info_value->fsp_size),&scan_type);
 
 	fclose(fp);
 	delete[]fsp_info_value;
