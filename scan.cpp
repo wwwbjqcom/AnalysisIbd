@@ -25,7 +25,7 @@ void PrintPageInfo(page_content* page_info)
 
 void PrintPageStatistics(index_info* info_arrary)
 {
-	printf("index_id:%u, pages:%lu, index root page no:%u, leaf pages:%lu, left direction pages:%lu, right dirction pages:%lu, no dirction pages:%lu, total deleted bytes:%lu, lsn warnings pages:%lu",
+	printf("index_id:%u, pages:%lu, index root page no:%u, leaf pages:%lu, left direction pages:%lu, right dirction pages:%lu, no dirction pages:%lu, total deleted bytes:%lu, lsn warnings pages:%lu\n",
 		info_arrary->index_id,info_arrary->total_pages,info_arrary->root_page,info_arrary->leaf_pages,info_arrary->left_direction_pages,info_arrary->right_dirction_pages,info_arrary->no_dirction_pages,
 		info_arrary->total_deleted_bytes,info_arrary->pages_warnings);
 }
@@ -87,7 +87,6 @@ int ScanPage(FILE* fp,uint* page_size,ulint* pages,ulint* type)
 		{
 			is_in_arrary = InArray(&index_id_arrary, page_info, &tmp_index_id,&index_count); //数组遍历、是否已存在索引信息
 			
-			cout << is_in_arrary << endl;
 			if (!is_in_arrary)  //不存在于数组中的索引新增指针信息
 			{
 				index_info* _info = new index_info;
@@ -127,8 +126,18 @@ int ScanPage(FILE* fp,uint* page_size,ulint* pages,ulint* type)
 /*统计索引信息*/
 void PageStatistics(page_content* page_info, index_info* info_arrary)
 {
-	if (page_info->page_level == 1) { info_arrary->root_page = page_info->page_no; }
-	else if (page_info->page_level == 0){ info_arrary->leaf_pages += 1; }
+	if (page_info->page_level == 1) 
+	{ 
+		info_arrary->root_page = page_info->page_no; 
+	}
+	else if (page_info->page_level == 0)
+	{ 
+		info_arrary->leaf_pages += 1; 
+	}
+	else
+	{
+		info_arrary->master_pages += 1;
+	}
 	info_arrary->total_deleted_bytes += page_info->deleted_bytes;
 	info_arrary->total_pages += 1;
 	info_arrary->pages_warnings += page_info->lsn_warngs;
@@ -144,7 +153,7 @@ void PageStatistics(page_content* page_info, index_info* info_arrary)
 	}
 	else if (page_info->direction == 5)
 	{
-		info_arrary->no_dirction_pages += 0;
+		info_arrary->no_dirction_pages += 1;
 	}
 }
 
@@ -157,18 +166,17 @@ bool InArray(uint (*index_id_arrary)[32], page_content* page_info,ulint* tmp_ind
 	}
 	else
 	{
-		for (uint i = 0; i < *index_count; i++)
+		bool checksum = false;
+		for (uint i = 0; i < (*index_count ); i++)
 		{
 			if (*index_id_arrary[i] == page_info->index_id)
 			{
 				*tmp_index_id = i;
-				return true;
-			}
-			else
-			{
-				return false;
+				checksum = true;
+				break;
 			}
 		}
+		return checksum;
 	}
 	
 }

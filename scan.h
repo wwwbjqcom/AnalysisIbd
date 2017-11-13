@@ -8,9 +8,10 @@
 typedef struct {
 	char index_name;
 	uint index_id;
-	ulint total_pages = 0;
+	ulint total_pages;
 	uint root_page;
 	ulint leaf_pages;
+	ulint master_pages;
 	ulint left_direction_pages;
 	ulint right_dirction_pages; 
 	ulint no_dirction_pages;
