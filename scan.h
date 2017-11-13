@@ -8,7 +8,7 @@
 typedef struct {
 	char index_name;
 	uint index_id;
-	ulint total_pages;
+	ulint total_pages = 0;
 	uint root_page;
 	ulint leaf_pages;
 	ulint left_direction_pages;
@@ -40,4 +40,4 @@ void ScanPageContent(byte* buffer, page_content* page_info,uint* page_size);
 
 void PageStatistics(page_content* page_info, index_info* info_arrary);
 
-bool InArray(uint(*index_id_arrary)[32], page_content* page_info, ulint* tmp_index_id);
+bool InArray(uint (*index_id_arrary)[32], page_content* page_info, ulint* tmp_index_id,uint* index_count);

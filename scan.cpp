@@ -1,6 +1,8 @@
 #include "scan.h"
 #include "byte_read.h"
 #include <cstring>
+#include <iostream>
+using namespace std;
 
 
 bool ut_a(ulint* type)
@@ -24,7 +26,7 @@ void PrintPageInfo(page_content* page_info)
 void PrintPageStatistics(index_info* info_arrary)
 {
 	printf("index_id:%u, pages:%lu, index root page no:%u, leaf pages:%lu, left direction pages:%lu, right dirction pages:%lu, no dirction pages:%lu, total deleted bytes:%lu, lsn warnings pages:%lu",
-		info_arrary->index_id,info_arrary->root_page,info_arrary->leaf_pages,info_arrary->left_direction_pages,info_arrary->right_dirction_pages,info_arrary->no_dirction_pages,
+		info_arrary->index_id,info_arrary->total_pages,info_arrary->root_page,info_arrary->leaf_pages,info_arrary->left_direction_pages,info_arrary->right_dirction_pages,info_arrary->no_dirction_pages,
 		info_arrary->total_deleted_bytes,info_arrary->pages_warnings);
 }
 
@@ -67,8 +69,8 @@ void ScanPageContent(byte* buffer, page_content* page_info,uint* page_size)
 int ScanPage(FILE* fp,uint* page_size,ulint* pages,ulint* type)
 {
 	index_info* info_arrary[32];
-	uint (*index_id_arrary)[32];
-	ulint index_count = 0;
+	uint index_id_arrary[32];
+	uint index_count = 0;
 
 	fseek(fp,(*page_size) * 3 , 0);
 	byte *buffer;
@@ -83,17 +85,22 @@ int ScanPage(FILE* fp,uint* page_size,ulint* pages,ulint* type)
 		ScanPageContent(buffer,page_info,page_size);
 		if (ut_a(type))
 		{
-			is_in_arrary = InArray(index_id_arrary, page_info, &tmp_index_id); //数组遍历、是否已存在索引信息
+			is_in_arrary = InArray(&index_id_arrary, page_info, &tmp_index_id,&index_count); //数组遍历、是否已存在索引信息
 			
+			cout << is_in_arrary << endl;
 			if (!is_in_arrary)  //不存在于数组中的索引新增指针信息
 			{
 				index_info* _info = new index_info;
 				_info->index_id = page_info->index_id;
 				info_arrary[index_count] = _info;
 				tmp_index_id = index_count; //新增的指针信息在数组中的下标
-				*index_id_arrary[index_count] = page_info->index_id; //记录index_id的数组和索引指针数组下标相同
+				index_id_arrary[index_count] = page_info->index_id; //记录index_id的数组和索引指针数组下标相同
 				PageStatistics(page_info, info_arrary[index_count]);
 				index_count += 1;
+			}
+			else
+			{
+				PageStatistics(page_info, info_arrary[tmp_index_id]);
 			}
 
 		}
@@ -105,7 +112,7 @@ int ScanPage(FILE* fp,uint* page_size,ulint* pages,ulint* type)
 	}
 	if (ut_a(type)) 
 	{
-		for (uint i = 0; i < 32; i++)
+		for (uint i = 0; i < index_count; i++)
 		{
 			PrintPageStatistics(info_arrary[i]);
 		}
@@ -142,17 +149,26 @@ void PageStatistics(page_content* page_info, index_info* info_arrary)
 }
 
 /*数组遍历、是否已存在索引信息*/
-bool InArray(uint(*index_id_arrary)[32], page_content* page_info,ulint* tmp_index_id)
+bool InArray(uint (*index_id_arrary)[32], page_content* page_info,ulint* tmp_index_id,uint* index_count)
 {
-	for (uint i = 0; i < 32; i++) 
+	if (*index_count == 0)
 	{
-		if (*index_id_arrary[i] == page_info->index_id)
+		return false;
+	}
+	else
+	{
+		for (uint i = 0; i < *index_count; i++)
 		{
-			*tmp_index_id = i;
-			return true;
+			if (*index_id_arrary[i] == page_info->index_id)
+			{
+				*tmp_index_id = i;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
-		else
-		{
-			return false;
-		}
+	}
+	
 }
