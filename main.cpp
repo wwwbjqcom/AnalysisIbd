@@ -11,12 +11,12 @@ int main(int argc, char ** argv)
 		for (int i = 1; i<argc; i++)
 		{
 			if (string(argv[i]) == "-h")
-				cout << "Usage: [-h] [-file file_path -type [Statistics of all page: 1 ,Scan all pages: 0]] " << endl;
+				cout << "Usage: [-h] [-file file_path -type [Statistics of all page: 1 ,Scan all pages: 0,default 0]] " << endl;
 			else if (string(argv[i]) == "-file")
 			{
 				if (argc < 3)
 				{
-					cout << "Usage: [-h] [-file file_path -type [Statistics of all page: 1 ,Scan all pages: 0]] " << endl;
+					cout << "Usage: [-h] [-file file_path -type [Statistics of all page: 1 ,Scan all pages: 0,default 0]] " << endl;
 					break;
 				}
 				else
@@ -27,12 +27,12 @@ int main(int argc, char ** argv)
 					return 1;
 				}
 			}
-			else cout << "Usage: [-h] [-file file_path -type [Statistics of all page: 1 ,Scan all pages: 0]] " << endl;
+			else cout << "Usage: [-h] [-file file_path -type [Statistics of all page: 1 ,Scan all pages: 0, default 0]] " << endl;
 		}
 	}
 	else
 	{
-		cout << "Usage: [-h] [-file file_path -type [Statistics of all page: 1 ,Scan all pages: 0]] " << endl;
+		cout << "Usage: [-h] [-file file_path -type [Statistics of all page: 1 ,Scan all pages: 0,default 0]] " << endl;
 
 	}
 	return 0;
