@@ -27,12 +27,20 @@ void PrintPageInfo(page_content* page_info)
 void PrintPageStatistics(index_info* info_arrary)
 {
 	cout << "Index ID:" << info_arrary->index_id << endl;
-	cout << right << setw(14) << "pages:" << right << setw(20) << info_arrary->total_pages;
+	cout << right << setw(14) << "pages:" << right << setw(11) << info_arrary->total_pages;
 	cout << right << setw(22) << "index root page no:" << right << setw(5) << info_arrary->root_page;
-	cout << right << setw(15) << "leaf pages:" << right << setw(20) << info_arrary->leaf_pages << endl;
+	cout << right << setw(15) << "leaf pages:" << right << setw(11) << info_arrary->leaf_pages << endl;
+
+	cout << right << setw(30) << "left direction pages:" << right << setw(11) << info_arrary->left_direction_pages;
+	cout << right << setw(30) << "right dirction pages:" << right << setw(11) << info_arrary->right_dirction_pages;
+	cout << right << setw(30) << "no dirction pages:" << right << setw(11) << info_arrary->no_dirction_pages;
+
+	cout << right << setw(29) << "total deleted bytes:" << right << setw(11) << info_arrary->total_deleted_bytes;
+	cout << right << setw(31) << "lsn warnings pages:" << right << setw(2) << info_arrary->pages_warnings << endl;
+	/*
 	printf("index_id:%u, pages:%lu, index root page no:%u, leaf pages:%lu, left direction pages:%lu, right dirction pages:%lu, no dirction pages:%lu, total deleted bytes:%lu, lsn warnings pages:%lu\n",
 		info_arrary->index_id,info_arrary->total_pages,info_arrary->root_page,info_arrary->leaf_pages,info_arrary->left_direction_pages,info_arrary->right_dirction_pages,info_arrary->no_dirction_pages,
-		info_arrary->total_deleted_bytes,info_arrary->pages_warnings);
+		info_arrary->total_deleted_bytes,info_arrary->pages_warnings);*/
 }
 
 void ScanPageContent(byte* buffer, page_content* page_info,uint* page_size)
