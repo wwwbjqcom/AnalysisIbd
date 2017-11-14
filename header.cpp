@@ -78,7 +78,7 @@ void *read_fsp_content(Fsp_Info *fsp_info_value, byte* buffer, uint offset, int 
 
 
 
-void Enter(char *file_name)
+void Enter(char *file_name,ulint* scan_type)
 {
 	Fsp_Info *fsp_info_value = new Fsp_Info;
 	FILE *fp = fsp_info_value->fp = fopen(file_name, "rb+");   //二进制模式
@@ -157,8 +157,7 @@ void Enter(char *file_name)
 	delete[]buffer;
 	Print_content(fsp_info_value);
 	/*scan all page*/
-	ulint scan_type = 1;
-	ScanPage(fp, &(fsp_info_value->page_size), &(fsp_info_value->fsp_size),&scan_type);
+	ScanPage(fp, &(fsp_info_value->page_size), &(fsp_info_value->fsp_size),scan_type);
 
 	fclose(fp);
 	delete[]fsp_info_value;

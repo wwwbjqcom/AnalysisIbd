@@ -11,7 +11,7 @@ typedef struct {
 	ulint total_pages;
 	uint root_page;
 	ulint leaf_pages;
-	ulint master_pages;
+	ulint no_level; //不是root页也不是leaf页的统计
 	ulint left_direction_pages;
 	ulint right_dirction_pages; 
 	ulint no_dirction_pages;

@@ -26,8 +26,8 @@ void PrintPageInfo(page_content* page_info)
 
 void PrintPageStatistics(index_info* info_arrary)
 {
-	printf("Index_id:%u, pages:%lu, index root page no:%u, master_pages:%lu, leaf pages:%lu, lsn warnings pages:%lu\n",
-		info_arrary->index_id,info_arrary->total_pages,info_arrary->root_page,info_arrary->master_pages,info_arrary->leaf_pages,info_arrary->pages_warnings);
+	printf("Index_id:%u, pages:%lu, index root page no:%u, no_level_pages:%lu, leaf pages:%lu, lsn warnings pages:%lu\n",
+		info_arrary->index_id,info_arrary->total_pages,info_arrary->root_page,info_arrary->no_level,info_arrary->leaf_pages,info_arrary->pages_warnings);
 	printf("       left direction pages:%lu, right dirction pages:%lu, no dirction pages:%lu, total deleted bytes:%lu\n",
 		info_arrary->left_direction_pages, info_arrary->right_dirction_pages, info_arrary->no_dirction_pages,
 		info_arrary->total_deleted_bytes );
@@ -139,7 +139,7 @@ void PageStatistics(page_content* page_info, index_info* info_arrary)
 	}
 	else
 	{
-		info_arrary->master_pages += 1;
+		info_arrary->no_level += 1;
 	}
 	info_arrary->total_deleted_bytes += page_info->deleted_bytes;
 	info_arrary->total_pages += 1;

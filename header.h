@@ -51,7 +51,7 @@ int check_unside(uint value);
 //获取簇、段的指针信息
 void *read_fsp_content(Fsp_Info *fsp_info_value, char* buffer, uint offset, int type);
 
-void Enter(char *file_name);
+void Enter(char *file_name,ulint* scan_type);
 
 void Print_content(Fsp_Info *fsp_info_value);
 
