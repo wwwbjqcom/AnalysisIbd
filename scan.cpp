@@ -2,6 +2,7 @@
 #include "byte_read.h"
 #include <cstring>
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 
@@ -25,6 +26,10 @@ void PrintPageInfo(page_content* page_info)
 
 void PrintPageStatistics(index_info* info_arrary)
 {
+	cout << "Index ID:" << info_arrary->index_id << endl;
+	cout << right << setw(14) << "pages:" << right << setw(20) << info_arrary->total_pages;
+	cout << right << setw(22) << "index root page no:" << right << setw(5) << info_arrary->root_page;
+	cout << right << setw(15) << "leaf pages:" << right << setw(20) << info_arrary->leaf_pages << endl;
 	printf("index_id:%u, pages:%lu, index root page no:%u, leaf pages:%lu, left direction pages:%lu, right dirction pages:%lu, no dirction pages:%lu, total deleted bytes:%lu, lsn warnings pages:%lu\n",
 		info_arrary->index_id,info_arrary->total_pages,info_arrary->root_page,info_arrary->leaf_pages,info_arrary->left_direction_pages,info_arrary->right_dirction_pages,info_arrary->no_dirction_pages,
 		info_arrary->total_deleted_bytes,info_arrary->pages_warnings);
@@ -169,7 +174,7 @@ bool InArray(uint (*index_id_arrary)[32], page_content* page_info,ulint* tmp_ind
 		bool checksum = false;
 		for (uint i = 0; i < (*index_count ); i++)
 		{
-			if (*index_id_arrary[i] == page_info->index_id)
+			if ((*index_id_arrary)[i] == page_info->index_id)
 			{
 				*tmp_index_id = i;
 				checksum = true;
