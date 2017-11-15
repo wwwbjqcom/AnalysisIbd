@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 386fc99a2c2a357ccfd7b582afed5398d147259e
 #include <iostream>
 #include <cstring>
 #include "header.h"
@@ -8,7 +12,7 @@ using namespace std;
 
 
 
-//ÊÇ·ñÎª-1
+//æ˜¯å¦ä¸º-1
 int check_unside(uint value)
 {
 	if (value == -1)
@@ -20,7 +24,7 @@ int check_unside(uint value)
 }
 
 
-//»ñÈ¡´Ø¡¢¶ÎµÄÖ¸ÕëĞÅÏ¢
+//è·å–ç°‡ã€æ®µçš„æŒ‡é’ˆä¿¡æ¯
 void *read_fsp_content(Fsp_Info *fsp_info_value, byte* buffer, uint offset, int type)
 {
 	ulint flst_len = check_unside(mach_read_from_4(buffer + offset + FLST_LEN));
@@ -80,7 +84,7 @@ void *read_fsp_content(Fsp_Info *fsp_info_value, byte* buffer, uint offset, int 
 void Enter(char *file_name,ulint* scan_type)
 {
 	Fsp_Info *fsp_info_value = new Fsp_Info;
-	FILE *fp = fsp_info_value->fp = fopen(file_name, "rb+");   //¶ş½øÖÆÄ£Ê½
+	FILE *fp = fsp_info_value->fp = fopen(file_name, "rb+");   //äºŒè¿›åˆ¶æ¨¡å¼
 	if (NULL == fp)
 	{
 		cout << file_name << ": No such file or directory" << endl;
@@ -94,7 +98,7 @@ void Enter(char *file_name,ulint* scan_type)
 	uint tmp_value = read_int(fp);
 	fsp_info_value->page_size = page_size_t(&tmp_value);
 
-	/* °ÑheaderÒ³¶ÁÈëbuffer*/
+	/* æŠŠheaderé¡µè¯»å…¥buffer*/
 	byte *buffer;
 	buffer = new byte[fsp_info_value->page_size];
 	fseek(fp, 0, 0);
@@ -135,21 +139,21 @@ void Enter(char *file_name,ulint* scan_type)
 	//fsp_frag_n_used
 	fsp_info_value->fsp_frag_n_used = mach_read_from_4(buffer + FSP_HEADER_OFFSET + FSP_FRAG_N_USED);
 
-	//is_com ÊÇ·ñÑ¹Ëõ
+	//is_com æ˜¯å¦å‹ç¼©
 	fsp_info_value->is_com = page_is_comp(buffer);
 
-	/*´ØÓÚ¶ÎÖ¸Õë*/
-	//¿ÕÏĞ´ØĞÅÏ¢
+	/*ç°‡äºæ®µæŒ‡é’ˆ*/
+	//ç©ºé—²ç°‡ä¿¡æ¯
 	read_fsp_content(fsp_info_value, buffer, FSP_HEADER_OFFSET + FSP_FREE, 1);
-	//°ë¿Õ´ØĞÅÏ¢
+	//åŠç©ºç°‡ä¿¡æ¯
 	read_fsp_content(fsp_info_value, buffer, FSP_HEADER_OFFSET + FSP_FREE_FRAG, 2);
-	//Âú´ØĞÅÏ¢
+	//æ»¡ç°‡ä¿¡æ¯
 	read_fsp_content(fsp_info_value, buffer, FSP_HEADER_OFFSET + FSP_FULL_FRAG, 3);
 
-	//Êı¾İ¶ÎĞÅÏ¢
-	//ÒÑÂúµÄÊı¾İÒ³Á´±íĞÅÏ¢
+	//æ•°æ®æ®µä¿¡æ¯
+	//å·²æ»¡çš„æ•°æ®é¡µé“¾è¡¨ä¿¡æ¯
 	read_fsp_content(fsp_info_value, buffer, FSP_HEADER_OFFSET + FSP_SEG_INODES_FULL, 4);
-	//°ëÂúµÄÊı¾İÒ³Á´±íĞÅÏ¢
+	//åŠæ»¡çš„æ•°æ®é¡µé“¾è¡¨ä¿¡æ¯
 	read_fsp_content(fsp_info_value, buffer, FSP_HEADER_OFFSET + FSP_SEG_INODES_FREE, 5);
 
 
