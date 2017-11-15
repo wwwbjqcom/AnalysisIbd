@@ -1,4 +1,4 @@
-//例子1：以二进制模式打开并写入文件
+
 #include <iostream>
 #include "header.h"
 
