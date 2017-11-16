@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 
->>>>>>> 386fc99a2c2a357ccfd7b582afed5398d147259e
 #include <iostream>
 #include <cstring>
 #include "header.h"
