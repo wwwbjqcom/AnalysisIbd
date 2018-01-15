@@ -1,3 +1,2 @@
 # AnalysisIbd
-my_tools/read_ibd
 供学习ibd文件的工具，可以扫描整个ibd的page及统计所有page的情况，可以简单分析索引性能及检查page是否正常，使用前直make即可，可以用-h获取参数列表
